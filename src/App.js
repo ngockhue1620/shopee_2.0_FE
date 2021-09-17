@@ -10,23 +10,23 @@ import Home from "./modules/shopee/pages/Home";
 import Header from "./modules/shopee/components/Header";
 
 function App() {
-  const links = useLinks().common;
+  const links = useLinks();
   return (
     <>
       <SnackbarProvider maxSnack={3}>
         <StylesProvider injectFirst>
-          <CssBaseline>
-            <ThemeProvider theme={theme}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline>
               <BrowserRouter>
                 <Header></Header>
                 <Switch>
-                  <Route path={links.home}>
+                  <Route path={links.shopee.home()}>
                     <Home />
                   </Route>
                 </Switch>
               </BrowserRouter>
-            </ThemeProvider>
-          </CssBaseline>
+            </CssBaseline>
+          </ThemeProvider>
         </StylesProvider>
       </SnackbarProvider>
     </>

@@ -6,11 +6,11 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
-import logoShopee from "../../../assets/logo-shopee.jpg";
 import { Button } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { ButtonPrimary } from "./buttons/ButtonPrimary";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import  shopee  from "../../../assets/images/shopee.jpg";
 
 export default function Header() {
   return (
@@ -81,7 +81,8 @@ export default function Header() {
 
         <Searchbar>
           <Link>
-            <Logo src={logoShopee}></Logo>
+            {/* <ShopeeImage/> */}
+            <Logo src={shopee} />
           </Link>
           <WrapSearch>
             <SearchForm>
@@ -159,7 +160,7 @@ const Wrapper = styled.div`
 const CustomSpan = styled.span`
   display: flex;
   align-items: center;
-  color: hsla(0,0%,100%,.9);
+  color: hsla(0, 0%, 100%, 0.9);
   font-weight: 500;
 `;
 const Navbar = styled.div`
@@ -258,6 +259,6 @@ const ListCategory = styled.ul`
   }
 `;
 const Category = styled.span`
-  color: hsla(0,0%,100%,.9);
+  color: hsla(0, 0%, 100%, 0.9);
   font-size: 0.9rem;
 `;

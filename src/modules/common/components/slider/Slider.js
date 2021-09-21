@@ -42,7 +42,7 @@ export default function Slider(props) {
   );
 }
 
-const CustomButton = styled(Button)`
+const CustomButton = styled(Button)` 
   padding: 0;
   height: 4rem;
   min-width: 1rem;

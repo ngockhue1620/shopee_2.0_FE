@@ -67,7 +67,7 @@ export default function Header() {
                   <HelpOutlineIcon
                     style={{ color: color.white1, fontSize: 20 }}
                   />{" "}
-                 {t("shopee.header.actions.support")}
+                  {t("shopee.header.actions.support")}
                 </TextWhite>
               </Link>
             </li>
@@ -150,7 +150,7 @@ export default function Header() {
 }
 const Root = styled.header`
   width: 100vw;
-  height: 17vh;
+
   background-color: ${color.orange1};
   position: fixed;
 `;

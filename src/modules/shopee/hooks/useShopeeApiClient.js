@@ -1,4 +1,4 @@
 import { getAppContainer } from "../../container";
 
 
-export const useShopeeAppApiClient = () => getAppContainer().shopeeApiClient
+export const useShopeeApiClient = () => getAppContainer().shopeeApiClient

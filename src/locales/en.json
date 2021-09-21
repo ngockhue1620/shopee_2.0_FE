@@ -2,16 +2,16 @@
   "shopee": {
     "header": {
       "actions": {
-        "sellerChannel": "Kênh Người Bán",
-        "register": "Đăng ký",
-        "login": "Đăng Nhập",
-        "becomeSeller": "Trở thành Người bán Shopee",
-        "downloadApp": "Tải ứng dụng",
-        "notification": "Thông báo",
-        "support": "Hỗ Trợ"
+        "kenhNguoiBan": "Kênh Người Bán",
+        "dangKy": "Đăng ký",
+        "dangNhap": "Đăng Nhập",
+        "troThanhNguoiBanShopee": "Trở thành Người bán Shopee",
+        "taiUngDung": "Tải ứng dụng",
+        "thongBao": "Thông báo",
+        "hoTro": "Hỗ Trợ"
       },
       "labels": {
-        "connect": "Kết nối"
+        "ketNoi": "Kết nối"
       }
     },
     "login":{

@@ -159,7 +159,7 @@ const Wrapper = styled.div`
 const CustomSpan = styled.span`
   display: flex;
   align-items: center;
-  color: hsla(0,0%,100%,.9);
+  color: hsla(0, 0%, 100%, 0.9);
   font-weight: 500;
 `;
 const Navbar = styled.div`
@@ -258,6 +258,6 @@ const ListCategory = styled.ul`
   }
 `;
 const Category = styled.span`
-  color: hsla(0,0%,100%,.9);
+  color: hsla(0, 0%, 100%, 0.9);
   font-size: 0.9rem;
 `;

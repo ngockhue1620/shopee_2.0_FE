@@ -1,8 +1,9 @@
-import { createTheme, responsiveFontSizes } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 
 const palette = {
   orange1: "#ee4d2d",
   white1: "#ffffff",
+  transparent1: "rgba(0,0,0,.18)",
 };
 
 export const color = {

@@ -1,16 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { color, theme } from "../../theme";
+import { color, spacing, theme } from "../../theme";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { Button } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import { ButtonPrimary } from "./buttons/ButtonPrimary";
+import { ButtonPrimary } from "../../common/components/buttons/ButtonPrimary";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import  shopee  from "../../../assets/images/shopee.jpg";
+import shopee from "../../../assets/images/shopee.jpg";
+import { SmallText } from "../../common/components/text/SmallText";
+import { SmallestText } from "../../common/components/text/SmallestText";
 
 export default function Header() {
   return (
@@ -20,22 +22,22 @@ export default function Header() {
           <OptionLeft>
             <li>
               <Link>
-                <CustomSpan>Kênh người bán</CustomSpan>
+                <TextWhite>Kênh người bán</TextWhite>
               </Link>
             </li>
 
             <li>
               <Link>
-                <CustomSpan>Trở thành Người bán Shoppe</CustomSpan>
+                <TextWhite>Trở thành Người bán Shoppe</TextWhite>
               </Link>
             </li>
             <li>
               <Link>
-                <CustomSpan>Tải ứng dụng</CustomSpan>
+                <TextWhite>Tải ứng dụng</TextWhite>
               </Link>
             </li>
             <li>
-              <CustomSpan>Kết nối</CustomSpan>
+              <TextWhite>Kết nối</TextWhite>
               <Link>
                 <FacebookIcon style={{ color: color.white1, fontSize: 20 }} />
               </Link>
@@ -48,32 +50,32 @@ export default function Header() {
           <OptionRight>
             <li>
               <Link>
-                <CustomSpan>
+                <TextWhite>
                   <NotificationsNoneIcon
                     style={{ color: color.white1, fontSize: 20 }}
                   />{" "}
                   Thông báo
-                </CustomSpan>
+                </TextWhite>
               </Link>
             </li>
             <li>
               <Link>
-                <CustomSpan>
+                <TextWhite>
                   <HelpOutlineIcon
                     style={{ color: color.white1, fontSize: 20 }}
                   />{" "}
                   Hỗ trợ
-                </CustomSpan>
+                </TextWhite>
               </Link>
             </li>
             <li>
               <Link>
-                <CustomSpan>Đăng nhập</CustomSpan>
+                <TextWhite>Đăng nhập</TextWhite>
               </Link>
             </li>
             <li>
               <Link>
-                <CustomSpan>Đăng ký</CustomSpan>
+                <TextWhite>Đăng ký</TextWhite>
               </Link>
             </li>
           </OptionRight>
@@ -94,42 +96,42 @@ export default function Header() {
             <ListCategory>
               <li>
                 <Link>
-                  <Category>Áo Khoác</Category>
+                  <CustomSmallestText>Áo Khoác</CustomSmallestText>
                 </Link>
               </li>
               <li>
                 <Link>
-                  <Category>Balo</Category>
+                  <CustomSmallestText>Balo</CustomSmallestText>
                 </Link>
               </li>
               <li>
                 <Link>
-                  <Category>Váy</Category>
+                  <CustomSmallestText>Váy</CustomSmallestText>
                 </Link>
               </li>
               <li>
                 <Link>
-                  <Category>Quần</Category>
+                  <CustomSmallestText>Quần</CustomSmallestText>
                 </Link>
               </li>
               <li>
                 <Link>
-                  <Category>Bông Tẩy Trang</Category>
+                  <CustomSmallestText>Bông Tẩy Trang</CustomSmallestText>
                 </Link>
               </li>
               <li>
                 <Link>
-                  <Category>Áo Phông</Category>
+                  <CustomSmallestText>Áo Phông</CustomSmallestText>
                 </Link>
               </li>
               <li>
                 <Link>
-                  <Category>Nồi Chiên Không Dầu</Category>
+                  <CustomSmallestText>Nồi Chiên Không Dầu</CustomSmallestText>
                 </Link>
               </li>
               <li>
                 <Link>
-                  <Category>Bánh Trung Thu</Category>
+                  <CustomSmallestText>Bánh Trung Thu</CustomSmallestText>
                 </Link>
               </li>
             </ListCategory>
@@ -155,13 +157,7 @@ const Wrapper = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
-  padding: 7px 0;
-`;
-const CustomSpan = styled.span`
-  display: flex;
-  align-items: center;
-  color: hsla(0, 0%, 100%, 0.9);
-  font-weight: 500;
+  padding: ${spacing.m} 0;
 `;
 const Navbar = styled.div`
   display: flex;
@@ -173,14 +169,14 @@ const OptionLeft = styled.ul`
   align-items: center;
 
   li {
-    padding: 0 0.5rem;
+    padding: 0 ${spacing.m};
     border-right: 2px solid hsla(0, 0%, 100%, 0.22);
     &:nth-last-child(1) {
       border: none;
       display: flex;
       align-items: center;
       * {
-        margin: 0 1px;
+        margin: 0 ${spacing.xxs};
       }
     }
   }
@@ -190,7 +186,7 @@ const OptionRight = styled.ul`
   align-items: center;
 
   li {
-    padding: 0 0.5rem;
+    padding: 0 ${spacing.m};
 
     &:nth-last-child(2) {
       border-right: 2px solid hsla(0, 0%, 100%, 0.22);
@@ -223,14 +219,14 @@ const SearchForm = styled.form`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   width: 100%;
   height: 2.5rem;
-  padding: 2px;
+  padding: ${spacing.xs};
 
   border-radius: 2px;
   input {
     flex-grow: 1;
     border: none;
     font-size: 0.9rem;
-    padding: 0 1rem;
+    padding: 0 ${spacing.m};
     &:hover,
     :focus,
     :active {
@@ -252,13 +248,21 @@ const CartIcon = styled(Link)`
   align-self: center;
 `;
 const ListCategory = styled.ul`
-  margin-top: 7px;
+  margin-top: ${spacing.m};
   display: flex;
   li {
-    margin-right: 8px;
+    margin-right: ${spacing.m};
   }
 `;
-const Category = styled.span`
-  color: hsla(0, 0%, 100%, 0.9);
-  font-size: 0.9rem;
+
+const TextWhite = styled(SmallText)`
+  color: white;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: ${spacing.s};
+  }
+`;
+const CustomSmallestText = styled(SmallestText)`
+  color: white;
 `;

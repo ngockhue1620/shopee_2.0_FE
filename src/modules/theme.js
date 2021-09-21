@@ -21,23 +21,24 @@ export const spacing = {
   xxl: "64px",
 };
 
-export const theme = responsiveFontSizes(
-  createTheme({
-    typography: {
-      htmlFontSize: 10,
-      subtitle1: {
-        fontSize: 14,
-      },
-      caption: {
-        fontSize: 16,
-      },
+export const theme = createTheme({
+  typography: {
+    htmlFontSize: 10,
+    subtitle1: {
+      fontSize: 14,
     },
+    subtitle2: {
+      fontSize: 12,
+    },
+    caption: {
+      fontSize: 16,
+    },
+  },
 
-    palette: {
-      primary: {
-        // Purple and green play nicely together.
-        main: color.primary,
-      },
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: color.primary,
     },
-  })
-);
+  },
+});

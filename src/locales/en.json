@@ -1,1 +1,22 @@
-{}
+{
+  "shopee": {
+    "header": {
+      "actions": {
+        "sellerChannel": "Kênh Người Bán",
+        "register": "Đăng ký",
+        "login": "Đăng Nhập",
+        "becomeSeller": "Trở thành Người bán Shopee",
+        "downloadApp": "Tải ứng dụng",
+        "notification": "Thông báo",
+        "support": "Hỗ Trợ"
+      },
+      "labels": {
+        "connect": "Kết nối"
+      }
+    },
+    "login":{
+
+    }
+  },
+  "addmin": {}
+}

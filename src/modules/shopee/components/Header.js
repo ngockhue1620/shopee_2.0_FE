@@ -6,15 +6,16 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
-import { Button } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { ButtonPrimary } from "../../common/components/buttons/ButtonPrimary";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import shopee from "../../../assets/images/shopee.jpg";
 import { SmallText } from "../../common/components/text/SmallText";
 import { SmallestText } from "../../common/components/text/SmallestText";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
+  const { t } = useTranslation();
   return (
     <Root>
       <Wrapper>
@@ -22,22 +23,24 @@ export default function Header() {
           <OptionLeft>
             <li>
               <Link>
-                <TextWhite>Kênh người bán</TextWhite>
+                <TextWhite>
+                  {t("shopee.header.actions.sellerChannel")}
+                </TextWhite>
               </Link>
             </li>
 
             <li>
               <Link>
-                <TextWhite>Trở thành Người bán Shoppe</TextWhite>
+                <TextWhite>{t("shopee.header.actions.becomeSeller")}</TextWhite>
               </Link>
             </li>
             <li>
               <Link>
-                <TextWhite>Tải ứng dụng</TextWhite>
+                <TextWhite>{t("shopee.header.actions.downloadApp")}</TextWhite>
               </Link>
             </li>
             <li>
-              <TextWhite>Kết nối</TextWhite>
+              <TextWhite>{t("shopee.header.labels.connect")}</TextWhite>
               <Link>
                 <FacebookIcon style={{ color: color.white1, fontSize: 20 }} />
               </Link>
@@ -54,7 +57,7 @@ export default function Header() {
                   <NotificationsNoneIcon
                     style={{ color: color.white1, fontSize: 20 }}
                   />{" "}
-                  Thông báo
+                  {t("shopee.header.actions.notification")}
                 </TextWhite>
               </Link>
             </li>
@@ -64,18 +67,18 @@ export default function Header() {
                   <HelpOutlineIcon
                     style={{ color: color.white1, fontSize: 20 }}
                   />{" "}
-                  Hỗ trợ
+                 {t("shopee.header.actions.support")}
                 </TextWhite>
               </Link>
             </li>
             <li>
               <Link>
-                <TextWhite>Đăng nhập</TextWhite>
+                <TextWhite>{t("shopee.header.actions.login")}</TextWhite>
               </Link>
             </li>
             <li>
               <Link>
-                <TextWhite>Đăng ký</TextWhite>
+                <TextWhite>{t("shopee.header.actions.register")}</TextWhite>
               </Link>
             </li>
           </OptionRight>
@@ -148,7 +151,7 @@ export default function Header() {
 const Root = styled.header`
   width: 100vw;
   height: 17vh;
-  background-color: ${theme.palette.primary.main};
+  background-color: ${color.orange1};
   position: fixed;
 `;
 const Wrapper = styled.div`
@@ -263,6 +266,7 @@ const TextWhite = styled(SmallText)`
     margin-right: ${spacing.s};
   }
 `;
+
 const CustomSmallestText = styled(SmallestText)`
   color: white;
 `;

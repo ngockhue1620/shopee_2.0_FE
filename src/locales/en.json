@@ -14,8 +14,38 @@
         "connect": "Kết nối"
       }
     },
+    "footer":{
+      "actions": {
+          "trungTapHoTro":"Trung Tâm Trợ Giúp",
+          "Shopeeblog":"Shopee Blog",
+          "ShopeeMall":"Shopee Mall",
+          "huongDanThanhToan":"Hướng Dẫn Mua Hàng",
+          "huongDanBanHang":"Hướng Dẫn Bán Hàng",
+          "thanhToan":"Thanh Toán",
+          "ShopeeXu":"Shopee Xu",
+          "vanChuyen":"Vận Chuyển",
+          "traHangHoanTien":"Trả Hàng & Hoàn Tiền",
+          "chamSocKhachHang": "CHĂM SÓC KHÁCH HÀNG",
+          "chinhSachBaoHanh":"chính sách bảo hành",
+          "gioiThieuShopee":"Giới Thiệu Về Shopee Việt Nam",
+          "tuyenDung":"Tuyển Dụng",
+          "dieuKhoan":"Điều Khoản Shopee",
+          "chinhSachBaoMat":"Chính Sách Bảo Mật",
+          "chinhHang":"Chính Hãng",
+          "kenhNguoiBan":"Kênh Người Bán",
+          "flashSales":"Flash Sales",
+          "tiepThiShopee":"Chương Trình Tiếp Thị Liên Kết Shopee",
+          "lienHeTruyenThong":"Liên Hệ Với Truyền Thông"
+      },
+      "labels": {
+        "chamSocKhachHang": "CHĂM SÓC KHÁCH HÀNG",
+        "veShopee":"VỀ SHOPEE",
+        "thanhToan":"THANH TOÁN",
+        "theoDoiChungToi":"THEO DÕI CHÚNG TÔI TRÊN",
+        "taiShopee":"TẢI ỨNG DỤNG SHOPEE NGAY THÔI"
+      }
+    },
     "login":{
-
     }
   },
   "addmin": {}

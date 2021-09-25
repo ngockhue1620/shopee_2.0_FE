@@ -8,7 +8,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./modules/theme";
 import Home from "./modules/shopee/pages/Home";
 import Header from "./modules/shopee/components/Header";
-
+import Footer from "./modules/shopee/components/Footer";
 function App() {
   const links = useLinks();
   return (
@@ -18,12 +18,13 @@ function App() {
           <ThemeProvider theme={theme}>
             <CssBaseline>
               <BrowserRouter>
-                <Header></Header>
-                <Switch>
+                {/* <Header></Header> */}
+                {/* <Switch>
                   <Route path={links.shopee.home()}>
                     <Home />
                   </Route>
-                </Switch>
+                </Switch> */}
+                <Footer></Footer>
               </BrowserRouter>
             </CssBaseline>
           </ThemeProvider>

@@ -3,6 +3,9 @@ import { createTheme, responsiveFontSizes } from "@material-ui/core/styles";
 const palette = {
   orange1: "#ee4d2d",
   white1: "#ffffff",
+  gray1:"rgba(0,0,0,.54)",
+  graylight1:"#fbfbfb",
+  graydark1:"#f5f5f5",
 };
 
 export const color = {
@@ -20,6 +23,19 @@ export const spacing = {
   xl: "32px",
   xxl: "64px",
 };
+
+const size = {
+  xs: "320px",
+  sm: "768px",
+  lg: "1200px",
+ }
+ const device = {
+  xs: `(min-width: ${size.xs})`,
+  sm: `(min-width: ${size.sm})`,
+  lg: `(min-width: ${size.lg})`
+ }
+
+export {size, device}
 
 export const theme = createTheme({
   typography: {

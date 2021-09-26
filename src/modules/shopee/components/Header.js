@@ -152,6 +152,7 @@ const Root = styled.header`
   width: 100vw;
   background-color: ${color.orange1};
   position: fixed;
+  z-index:999999;
 `;
 const Wrapper = styled.div`
   max-width: 1200px;

@@ -42,7 +42,7 @@ export default function Slider(props) {
   );
 }
 
-const CustomButton = styled(Button)`
+const CustomButton = styled(Button)` 
   padding: 0;
   height: 4rem;
   min-width: 1rem;
@@ -51,7 +51,7 @@ const CustomButton = styled(Button)`
   transform: translateY(-50%);
   background-color: ${color.transparent1};
   display: none;
-  animation-name: example;
+  animation-name: showSlow;
   animation-duration: 1s;
   svg {
     color: white;

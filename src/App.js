@@ -20,7 +20,7 @@ function App() {
               <BrowserRouter>
                 <Header></Header>
                 <Switch>
-                  <Route path={links.shopee.home()}>
+                  <Route path={links.shopee.home()}> 
                     <Home />
                   </Route>
                 </Switch>

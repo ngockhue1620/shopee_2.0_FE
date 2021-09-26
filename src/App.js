@@ -18,12 +18,12 @@ function App() {
           <ThemeProvider theme={theme}>
             <CssBaseline>
               <BrowserRouter>
-                {/* <Header></Header> */}
-                {/* <Switch>
+                <Header></Header>
+                <Switch>
                   <Route path={links.shopee.home()}>
                     <Home />
                   </Route>
-                </Switch> */}
+                </Switch>
                 <Footer></Footer>
               </BrowserRouter>
             </CssBaseline>

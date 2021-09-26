@@ -24,23 +24,23 @@ export default function Header() {
             <li>
               <Link>
                 <TextWhite>
-                  {t("shopee.header.actions.sellerChannel")}
+                  {t("shopee.header.actions.kenhNguoiBan")}
                 </TextWhite>
               </Link>
             </li>
 
             <li>
               <Link>
-                <TextWhite>{t("shopee.header.actions.becomeSeller")}</TextWhite>
+                <TextWhite>{t("shopee.header.actions.troThanhNguoiBanShopee")}</TextWhite>
               </Link>
             </li>
             <li>
               <Link>
-                <TextWhite>{t("shopee.header.actions.downloadApp")}</TextWhite>
+                <TextWhite>{t("shopee.header.actions.taiUngDung")}</TextWhite>
               </Link>
             </li>
             <li>
-              <TextWhite>{t("shopee.header.labels.connect")}</TextWhite>
+              <TextWhite>{t("shopee.header.labels.ketNoi")}</TextWhite>
               <Link>
                 <FacebookIcon style={{ color: color.white1, fontSize: 20 }} />
               </Link>
@@ -57,7 +57,7 @@ export default function Header() {
                   <NotificationsNoneIcon
                     style={{ color: color.white1, fontSize: 20 }}
                   />{" "}
-                  {t("shopee.header.actions.notification")}
+                  {t("shopee.header.actions.thongBao")}
                 </TextWhite>
               </Link>
             </li>
@@ -67,18 +67,18 @@ export default function Header() {
                   <HelpOutlineIcon
                     style={{ color: color.white1, fontSize: 20 }}
                   />{" "}
-                 {t("shopee.header.actions.support")}
+                  {t("shopee.header.actions.hoTro")}
                 </TextWhite>
               </Link>
             </li>
             <li>
               <Link>
-                <TextWhite>{t("shopee.header.actions.login")}</TextWhite>
+                <TextWhite>{t("shopee.header.actions.dangNhap")}</TextWhite>
               </Link>
             </li>
             <li>
               <Link>
-                <TextWhite>{t("shopee.header.actions.register")}</TextWhite>
+                <TextWhite>{t("shopee.header.actions.dangKy")}</TextWhite>
               </Link>
             </li>
           </OptionRight>
@@ -150,9 +150,9 @@ export default function Header() {
 }
 const Root = styled.header`
   width: 100vw;
-  height: 17vh;
   background-color: ${color.orange1};
   position: fixed;
+  z-index:999999;
 `;
 const Wrapper = styled.div`
   max-width: 1200px;

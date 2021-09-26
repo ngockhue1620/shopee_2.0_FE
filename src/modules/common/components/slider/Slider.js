@@ -51,7 +51,7 @@ const CustomButton = styled(Button)`
   transform: translateY(-50%);
   background-color: ${color.transparent1};
   display: none;
-  animation-name: example;
+  animation-name: showSlow;
   animation-duration: 1s;
   svg {
     color: white;

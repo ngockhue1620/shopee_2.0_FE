@@ -150,6 +150,7 @@ export default function Header() {
 }
 const Root = styled.header`
   width: 100vw;
+
   background-color: ${color.orange1};
   position: fixed;
   z-index:999999;

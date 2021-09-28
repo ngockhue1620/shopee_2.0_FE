@@ -14,6 +14,17 @@
         "ketNoi": "Kết nối"
       }
     },
+    "login":{
+      "action":{
+        "NeedHelp":"Cần Trợ Giúp?",
+        "ForgotPassword":"Quên mật khẩu"
+      },
+      "label":{
+        "login":"Đăng Nhập",
+        "register": "Đăng ký",
+        "NewToShopee?":"Bạn mới biết đến Shopee?"
+      }
+    },
     "footer":{
       "actions": {
           "trungTamHoTro":"Trung Tâm Trợ Giúp",
@@ -71,9 +82,8 @@
         "maDanhNghiem":"Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch & Đầu tư TP Hà Nội cấp lần đầu ngày 10/02/2015",
         "banQuyen":"© 2015 - Bản quyền thuộc về Công ty TNHH Shopee"
       }
-    },
-    "login":{
     }
+   
   },
   "addmin": {}
 }

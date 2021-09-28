@@ -10,6 +10,7 @@ import Home from "./modules/shopee/pages/Home";
 import Header from "./modules/shopee/components/Header";
 import Login from "./modules/shopee/pages/Login";
 
+import Footer from "./modules/shopee/components/Footer";
 function App() {
   const links = useLinks();
   return (
@@ -27,6 +28,7 @@ function App() {
                     <Login />
                   </Route>
                 </Switch>
+                <Footer></Footer>
               </BrowserRouter>
             </CssBaseline>
           </ThemeProvider>

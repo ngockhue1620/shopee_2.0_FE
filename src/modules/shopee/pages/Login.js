@@ -7,9 +7,17 @@ import { LargeText } from "../../common/components/text/LargeText";
 import { NormalText } from "../../common/components/text/NormalText";
 import { Link } from "react-router-dom";
 import BodyLogin from "../components/BodyLogin";
+import { useShopeeApiClient } from "../hooks/useShopeeApiClient";
+import useAsync from "../../common/hooks/useAsync";
 
 export default function Login() {
   const { t } = useTranslation();
+  const api = useShopeeApiClient();
+  const login = useAsync(async (data) => {
+    const result = await api.login(data);
+    if (result) {
+    }
+  });
   return (
     <MainLayout>
       <HeaderLogin>

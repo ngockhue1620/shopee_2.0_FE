@@ -4,6 +4,7 @@ export const getAppLinks = () => {
   }
   const shopee={
     home: () => "/",
+    login:()=>"/login"
   }
   const admin={
 

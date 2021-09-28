@@ -72,7 +72,7 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to="login">
                 <TextWhite>{t("shopee.header.actions.login")}</TextWhite>
               </Link>
             </li>

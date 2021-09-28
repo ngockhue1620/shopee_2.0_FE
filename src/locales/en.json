@@ -15,7 +15,16 @@
       }
     },
     "login":{
-
+      "action":{
+        "NeedHelp":"Cần Trợ Giúp?",
+        "ForgotPassword":"Quên mật khẩu"
+      },
+      "label":{
+        "login":"Đăng Nhập",
+        "register": "Đăng ký",
+        "NewToShopee?":"Bạn mới biết đến Shopee?"
+      }
+   
     }
   },
   "addmin": {}

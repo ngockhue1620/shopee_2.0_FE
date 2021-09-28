@@ -8,6 +8,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./modules/theme";
 import Home from "./modules/shopee/pages/Home";
 import Header from "./modules/shopee/components/Header";
+import Login from "./modules/shopee/pages/Login";
 
 function App() {
   const links = useLinks();
@@ -18,10 +19,12 @@ function App() {
           <ThemeProvider theme={theme}>
             <CssBaseline>
               <BrowserRouter>
-                <Header></Header>
                 <Switch>
-                  <Route path={links.shopee.home()}>
+                  <Route exact path={links.shopee.home()}>
                     <Home />
+                  </Route>
+                  <Route path={links.shopee.login()}>
+                    <Login />
                   </Route>
                 </Switch>
               </BrowserRouter>

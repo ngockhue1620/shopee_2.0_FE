@@ -19,6 +19,9 @@ import slider16 from "../../../assets/images/slider16.png";
 import Slider from "../../common/components/slider/Slider";
 import { useShopeeApiClient } from "../hooks/useShopeeApiClient";
 import useAsync from "../../common/hooks/useAsync";
+import { ListCategory } from "../../common/components/category/ListCategory";
+
+
 
 const listImage = [
   slider1,
@@ -44,6 +47,7 @@ export default function Home() {
         <ContainerSlider>
           <Slider listImage={listImage}></Slider>
         </ContainerSlider>
+        <ListCategory></ListCategory>
       </Root>
     </EmptyLayout>
   );

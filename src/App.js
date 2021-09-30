@@ -9,9 +9,8 @@ import { theme } from "./modules/theme";
 import Home from "./modules/shopee/pages/Home";
 import Header from "./modules/shopee/components/Header";
 import Login from "./modules/shopee/pages/Login";
-
 import Footer from "./modules/shopee/components/Footer";
-import Category from "./modules/shopee/pages/Category";
+
 function App() {
   const links = useLinks();
   return (
@@ -29,7 +28,6 @@ function App() {
                     <Login />
                   </Route>
                 </Switch>
-                <Category/>
                 <Footer></Footer>
               </BrowserRouter>
             </CssBaseline>

@@ -9,7 +9,7 @@ import { theme } from "./modules/theme";
 import Home from "./modules/shopee/pages/Home";
 import Header from "./modules/shopee/components/Header";
 import Login from "./modules/shopee/pages/Login";
-
+import Register from "./modules/shopee/pages/Register";
 import Footer from "./modules/shopee/components/Footer";
 import Category from "./modules/shopee/pages/Category";
 function App() {
@@ -28,8 +28,11 @@ function App() {
                   <Route path={links.shopee.login()}>
                     <Login />
                   </Route>
+                  <Route path={links.shopee.register()}>
+                    <Register />
+                  </Route>
                 </Switch>
-                <Category/>
+                <Category />
                 <Footer></Footer>
               </BrowserRouter>
             </CssBaseline>

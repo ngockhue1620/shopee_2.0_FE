@@ -15,14 +15,15 @@
       }
     },
     "login":{
-      "action":{
+      "actions":{
         "NeedHelp":"Cần Trợ Giúp?",
         "ForgotPassword":"Quên mật khẩu"
       },
-      "label":{
+      "labels":{
         "login":"Đăng Nhập",
         "register": "Đăng ký",
-        "NewToShopee?":"Bạn mới biết đến Shopee?"
+        "NewToShopee?":"Bạn mới biết đến Shopee?", 
+        "HadAnAccount?":"Bạn đã có tài khoản?"
       }
     },
     "footer":{

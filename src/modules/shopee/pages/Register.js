@@ -10,8 +10,7 @@ import BodyShopeeLogin from "../../../assets/images/BodyShopeeLogin.png";
 import { useShopeeApiClient } from "../hooks/useShopeeApiClient";
 import useAsync from "../../common/hooks/useAsync";
 import { useForm } from "react-hook-form";
-
-export default function Login() {
+export default function Register() {
   const { t } = useTranslation();
   const api = useShopeeApiClient();
   const login = useAsync(async (data) => {
@@ -31,75 +30,52 @@ export default function Login() {
   };
   return (
     <MainLayout>
-      <HeaderLogin>
+      <HeaderRegister>
         <HeaderLeft>
           <Logo src={Shopee2}></Logo>
-          <LoginLabel>{t("shopee.login.labels.login")}</LoginLabel>
+          <LoginLabel>{t("shopee.login.labels.register")}</LoginLabel>
         </HeaderLeft>
 
         <Link>
           {" "}
           <NeedHelp>{t("shopee.login.actions.NeedHelp")}</NeedHelp>
         </Link>
-      </HeaderLogin>
-      <Root>
+      </HeaderRegister>
+      <BodyRegister>
         <Wrapper>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <LoginLabel>{t("shopee.login.labels.login")}</LoginLabel>
+            <LoginLabel>{t("shopee.login.labels.register")}</LoginLabel>
 
             <InputLogin
               id="email"
               aria-invalid={errors.email ? "true" : "false"}
-              {...register("email", {
-                required: "required",
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message: "Entered value does not match email format",
-                },
-              })}
               type="email"
               placeholder="Email đăng nhập"
             />
-            {errors.email && (
-              <ErrorMessage role="alert">{errors.email.message}</ErrorMessage>
-            )}
 
             <InputLogin
               id="password"
               aria-invalid={errors.passward ? "true" : "false"}
-              {...register("password", {
-                required: "required",
-                minLength: {
-                  value: 5,
-                  message: "min length is 5",
-                },
-              })}
               type="password"
               placeholder="Mật khẩu"
             />
 
-            {errors.password && (
-              <ErrorMessage role="alert">
-                {errors.password.message}
-              </ErrorMessage>
-            )}
-
             <SubmitButton type="submit">
-              {t("shopee.login.labels.login")}
+              {t("shopee.login.labels.register")}
             </SubmitButton>
             <TextWhite>
-              {t("shopee.login.labels.NewToShopee?")}
-              <Link to="/register">
-                <Register>{t("shopee.login.labels.register")}</Register>
+              {t("shopee.login.labels.HadAnAccount?")}
+              <Link to="/login">
+                <Login>{t("shopee.login.labels.login")}</Login>
               </Link>
             </TextWhite>
           </Form>
         </Wrapper>
-      </Root>
+      </BodyRegister>
     </MainLayout>
   );
 }
-const HeaderLogin = styled.nav`
+const HeaderRegister = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -114,13 +90,17 @@ const HeaderLeft = styled.div`
   align-items: center;
 `;
 
+const LoginLabel = styled(LargeText)`
+  font-size: 1.5rem;
+`;
 const NeedHelp = styled(NormalText)`
   color: #ee4d2d;
   font-size: 0.875rem;
   margin-right: 0.9375rem;
   cursor: pointer;
 `;
-const Root = styled.div`
+
+const BodyRegister = styled.div`
   width: 100vw;
 
   display: block;
@@ -135,10 +115,6 @@ const Wrapper = styled.div`
   background-image: url(${BodyShopeeLogin});
 `;
 
-const LoginLabel = styled(LargeText)`
-  font-size: 1.5rem;
-  width: 100%;
-`;
 const Form = styled.form`
   display: block;
   background-color: #fff;
@@ -176,7 +152,7 @@ const TextWhite = styled.p`
   text-align: center;
   color: rgba(0, 0, 0, 0.26);
 `;
-const Register = styled(NormalText)`
+const Login = styled(NormalText)`
   color: #ee4d2d;
 
   margin-right: 0.9375rem;

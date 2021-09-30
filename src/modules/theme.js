@@ -9,7 +9,7 @@ const palette = {
   graydark1:"#f5f5f5",
 
   transparent1: "rgba(0,0,0,.18)",
-
+  transparent2:"rgba(0,0,0,.05)",
 };
 
 export const color = {
@@ -56,6 +56,9 @@ export const theme = createTheme({
   },
 
   palette: {
+    background:{
+      default:color.graydark1,
+    },
     primary: {
       // Purple and green play nicely together.
       main: color.primary,

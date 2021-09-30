@@ -15,11 +15,11 @@
       }
     },
     "login":{
-      "action":{
+      "actions":{
         "NeedHelp":"Cần Trợ Giúp?",
         "ForgotPassword":"Quên mật khẩu"
       },
-      "label":{
+      "labels":{
         "login":"Đăng Nhập",
         "register": "Đăng ký",
         "NewToShopee?":"Bạn mới biết đến Shopee?"
@@ -81,8 +81,16 @@
         "quanLyNoiDung":"Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Đức Trí - Điện thoại liên hệ: 024 73081221 (ext 4678)",
         "maDanhNghiem":"Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch & Đầu tư TP Hà Nội cấp lần đầu ngày 10/02/2015",
         "banQuyen":"© 2015 - Bản quyền thuộc về Công ty TNHH Shopee"
+       
+      }
+    },
+    "listCategory":{
+      "actions":{},
+      "labels":{
+        "danhMuc":"DANH MỤC"
       }
     }
+
    
   },
   "addmin": {}

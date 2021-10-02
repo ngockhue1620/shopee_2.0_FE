@@ -56,4 +56,5 @@ const Root = styled.main`
   max-width: 1200px;
   margin: auto;
   padding-top: 20vh;
+  display: -webkit-box;
 `;

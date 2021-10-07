@@ -1,9 +1,8 @@
 import React from "react";
 import { useEffect, createContext, useContext } from "react";
 import { useState } from "react";
+import { useShopeeApiClient } from "../../shopee/hooks/useShopeeApiClient";
 import useAsync from "../hooks/useAsync";
-import { useAuthApiClient } from "../hooks/useAuthApiClient";
-import { User } from "../services/types/User";
 
 const AuthContext = createContext({
   user: null,
@@ -23,13 +22,13 @@ export const AuthProvider = (props) => {
 
   const api = useShopeeApiClient();
 
-  const currentUser = useAsync(async () => {
-    const result = await api.getCurrentUser();
+  // const currentUser = useAsync(async () => {
+  //   const result = await api.getCurrentUser();
 
-    if (result) {
-      setUser(result);
-    }
-  });
+  //   if (result) {
+  //     setUser(result);
+  //   }
+  // });
 
   const contextValue = {
     user,
@@ -39,7 +38,7 @@ export const AuthProvider = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      currentUser.run();
+      // currentUser.run();
     }
   }, []);
 

@@ -9,11 +9,18 @@ export const createShopeeApiClient = (api) => {
 
 const login = (api) => async (data) => {
   try {
-    const res = await api.post("/user/login", data);
+    const res = await api.post("/api_oauth2/login", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "multipart/form-data",
+      },
+      data,
+    });
 
     return res.data;
   } catch (error) {}
 };
+
 const getCategory = (api) => async () => {
   try {
     const res = await api.get("/categories");

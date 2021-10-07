@@ -11,69 +11,88 @@
         "hoTro": "Hỗ Trợ"
       },
       "labels": {
+        "timShop": "Tìm Shop",
         "ketNoi": "Kết nối",
-        "shopeePay&DichVuTienIch":"ShopeePay & dịch vụ tiện ích"
+        "shopeePay&DichVuTienIch": "ShopeePay & dịch vụ tiện ích"
       }
     },
-    "footer":{
+    "login": {
       "actions": {
-          "trungTamHoTro":"Trung Tâm Trợ Giúp",
-          "shopeeBlog":"Shopee Blog",
-          "shopeeMall":"Shopee Mall",
-          "huongDanMuaHang":"Hướng Dẫn Mua Hàng",
-          "huongDanBanHang":"Hướng Dẫn Bán Hàng",
-          "thanhToan":"Thanh Toán",
-          "shopeeXu":"Shopee Xu",
-          "vanChuyen":"Vận Chuyển",
-          "traHangHoanTien":"Trả Hàng & Hoàn Tiền",
-          "chamSocKhachHang": "CHĂM SÓC KHÁCH HÀNG",
-          "chinhSachBaoHanh":"chính sách bảo hành",
-          "gioiThieuShopee":"Giới Thiệu Về Shopee Việt Nam",
-          "tuyenDung":"Tuyển Dụng",
-          "dieuKhoan":"Điều Khoản Shopee",
-          "chinhSachBaoMat1":"Chính Sách Bảo Mật",
-          "chinhHang":"Chính Hãng",
-          "kenhNguoiBan":"Kênh Người Bán",
-          "flashSales":"Flash Sales",
-          "tiepThiShopee":"Chương Trình Tiếp Thị Liên Kết Shopee",
-          "lienHeTruyenThong":"Liên Hệ Với Truyền Thông",
-          "facebook":"Facebook",
-          "instagram":"Instagram",
-          "linkedIn":"LinkedIn",
-          "sin":"Singapore",
-          "indo":"Indonesia",
-          "daiLoan":"Đài Loan",
-          "thai":"Thái Lan",
-          "malay":"Malaysia",
-          "viet":"Việt Nam",
-          "phi":"Philippines",
-          "brazil":"Brazil",
-          "mexico":"Mexico",
-          "colombia":"Colombia",
-          "chile":"Chile",
-          "chinhSachBaoMat2":"CHÍNH SÁCH BẢO MẬT",
-          "quyCheHoatDong":"QUY CHẾ HOẠT ĐỘNG",
-          "chinhSachVanChuyen":"CHÍNH SÁCH VẬN CHUYỂN",
-          "chinhSachHoanTra":"CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN"
-
+        "NeedHelp": "Cần Trợ Giúp?",
+        "ForgotPassword": "Quên mật khẩu"
+      },
+      "labels": {
+        "login": "Đăng Nhập",
+        "register": "Đăng ký",
+        "NewToShopee?": "Bạn mới biết đến Shopee?",
+        "HadAnAccount?": "Bạn đã có tài khoản?"
+      },
+      "messages": {
+        "dangNhapThanhCong": "Đăng nhập thành công !"
+      }
+    },
+    "footer": {
+      "actions": {
+        "trungTamHoTro": "Trung Tâm Trợ Giúp",
+        "shopeeBlog": "Shopee Blog",
+        "shopeeMall": "Shopee Mall",
+        "huongDanMuaHang": "Hướng Dẫn Mua Hàng",
+        "huongDanBanHang": "Hướng Dẫn Bán Hàng",
+        "thanhToan": "Thanh Toán",
+        "shopeeXu": "Shopee Xu",
+        "vanChuyen": "Vận Chuyển",
+        "traHangHoanTien": "Trả Hàng & Hoàn Tiền",
+        "chamSocKhachHang": "CHĂM SÓC KHÁCH HÀNG",
+        "chinhSachBaoHanh": "chính sách bảo hành",
+        "gioiThieuShopee": "Giới Thiệu Về Shopee Việt Nam",
+        "tuyenDung": "Tuyển Dụng",
+        "dieuKhoan": "Điều Khoản Shopee",
+        "chinhSachBaoMat1": "Chính Sách Bảo Mật",
+        "chinhHang": "Chính Hãng",
+        "kenhNguoiBan": "Kênh Người Bán",
+        "flashSales": "Flash Sales",
+        "tiepThiShopee": "Chương Trình Tiếp Thị Liên Kết Shopee",
+        "lienHeTruyenThong": "Liên Hệ Với Truyền Thông",
+        "facebook": "Facebook",
+        "instagram": "Instagram",
+        "linkedIn": "LinkedIn",
+        "sin": "Singapore",
+        "indo": "Indonesia",
+        "daiLoan": "Đài Loan",
+        "thai": "Thái Lan",
+        "malay": "Malaysia",
+        "viet": "Việt Nam",
+        "phi": "Philippines",
+        "brazil": "Brazil",
+        "mexico": "Mexico",
+        "colombia": "Colombia",
+        "chile": "Chile",
+        "chinhSachBaoMat2": "CHÍNH SÁCH BẢO MẬT",
+        "quyCheHoatDong": "QUY CHẾ HOẠT ĐỘNG",
+        "chinhSachVanChuyen": "CHÍNH SÁCH VẬN CHUYỂN",
+        "chinhSachHoanTra": "CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN"
       },
       "labels": {
         "chamSocKhachHang": "CHĂM SÓC KHÁCH HÀNG",
-        "veShopee":"VỀ SHOPEE",
-        "thanhToan":"THANH TOÁN",
-        "donViVanChuyen":"ĐƠN VỊ VẬN CHUYỂN",
-        "theoDoiChungToi":"THEO DÕI CHÚNG TÔI TRÊN",
-        "taiShopee":"TẢI ỨNG DỤNG SHOPEE NGAY THÔI",
-        "quyenBaoLuu":"© 2021 Shopee. Tất cả các quyền được bảo lưu.",
-        "quocGiaKhuVuc":"Quốc gia & Khu vực:",
-        "ctyShopee":"Công ty TNHH Shopee",
-        "diaChi":"Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.shopee.vn",
-        "quanLyNoiDung":"Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Đức Trí - Điện thoại liên hệ: 024 73081221 (ext 4678)",
-        "maDanhNghiem":"Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch & Đầu tư TP Hà Nội cấp lần đầu ngày 10/02/2015",
-        "banQuyen":"© 2015 - Bản quyền thuộc về Công ty TNHH Shopee"
+        "veShopee": "VỀ SHOPEE",
+        "thanhToan": "THANH TOÁN",
+        "donViVanChuyen": "ĐƠN VỊ VẬN CHUYỂN",
+        "theoDoiChungToi": "THEO DÕI CHÚNG TÔI TRÊN",
+        "taiShopee": "TẢI ỨNG DỤNG SHOPEE NGAY THÔI",
+        "quyenBaoLuu": "© 2021 Shopee. Tất cả các quyền được bảo lưu.",
+        "quocGiaKhuVuc": "Quốc gia & Khu vực:",
+        "ctyShopee": "Công ty TNHH Shopee",
+        "diaChi": "Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.shopee.vn",
+        "quanLyNoiDung": "Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Đức Trí - Điện thoại liên hệ: 024 73081221 (ext 4678)",
+        "maDanhNghiem": "Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch & Đầu tư TP Hà Nội cấp lần đầu ngày 10/02/2015",
+        "banQuyen": "© 2015 - Bản quyền thuộc về Công ty TNHH Shopee"
       }
     },
-    "login":{
+    "listCategory": {
+      "actions": {},
+      "labels": {
+        "danhMuc": "DANH MỤC"
+      }
     }
   },
   "addmin": {}

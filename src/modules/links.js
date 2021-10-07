@@ -1,17 +1,15 @@
 export const getAppLinks = () => {
-  const common = {
-    
-  }
-  const shopee={
+  const common = {};
+  const shopee = {
     home: () => "/",
-  }
-  const admin={
-
-  }
+    login: () => "/login",
+    register: () => "/register",
+  };
+  const admin = {};
 
   return {
     common,
     shopee,
-    admin
-  }
-}
+    admin,
+  };
+};

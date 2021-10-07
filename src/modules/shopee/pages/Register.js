@@ -10,21 +10,12 @@ import BodyShopeeLogin from "../../../assets/images/BodyShopeeLogin.png";
 import { useShopeeApiClient } from "../hooks/useShopeeApiClient";
 import useAsync from "../../common/hooks/useAsync";
 import { useForm } from "react-hook-form";
-import { SpinnerPrimary } from "../../common/components/spinner/SpinnerPrimary";
-import { useSnackbar } from "notistack";
-import { Card } from "@material-ui/core";
-
-export default function Login() {
-  const { enqueueSnackbar } = useSnackbar();
+export default function Register() {
   const { t } = useTranslation();
   const api = useShopeeApiClient();
   const login = useAsync(async (data) => {
     const result = await api.login(data);
     if (result) {
-      console.log(result);
-      enqueueSnackbar(t("shopee.login.messages.dangNhapThanhCong"), {
-        variant: "success",
-      });
     }
   });
   const {
@@ -34,76 +25,57 @@ export default function Login() {
     reset,
   } = useForm();
   const onSubmit = async (data) => {
-    login.run(data);
-    console.log(data);
+    await login(data.email, data.password);
+    reset();
   };
   return (
     <MainLayout>
-      <HeaderLogin>
+      <HeaderRegister>
         <HeaderLeft>
           <Logo src={Shopee2}></Logo>
-          <LoginLabel>{t("shopee.login.labels.login")}</LoginLabel>
+          <LoginLabel>{t("shopee.login.labels.register")}</LoginLabel>
         </HeaderLeft>
 
         <Link>
           {" "}
           <NeedHelp>{t("shopee.login.actions.NeedHelp")}</NeedHelp>
         </Link>
-      </HeaderLogin>
-      <Root>
+      </HeaderRegister>
+      <BodyRegister>
         <Wrapper>
-          <CustomCard>
-            <Form onSubmit={handleSubmit(onSubmit)}>
-              <LoginLabel>{t("shopee.login.labels.login")}</LoginLabel>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <LoginLabel>{t("shopee.login.labels.register")}</LoginLabel>
 
-              <InputLogin
-                autoFocus
-                required
-                {...register("username")}
-                type="text"
-                placeholder="Email đăng nhập"
-              />
+            <InputLogin
+              id="email"
+              aria-invalid={errors.email ? "true" : "false"}
+              type="email"
+              placeholder="Email đăng nhập"
+            />
 
-              <InputLogin
-                {...register("password", {
-                  required: "required",
-                  minLength: {
-                    value: 5,
-                    message: "min length is 5",
-                  },
-                })}
-                type="password"
-                placeholder="Mật khẩu"
-              />
+            <InputLogin
+              id="password"
+              aria-invalid={errors.passward ? "true" : "false"}
+              type="password"
+              placeholder="Mật khẩu"
+            />
 
-              {errors.password && (
-                <ErrorMessage role="alert">
-                  {errors.password.message}
-                </ErrorMessage>
-              )}
-
-              {login.loading ? (
-                <SpinnerPrimary />
-              ) : (
-                <SubmitButton type="submit">
-                  {t("shopee.login.labels.login")}
-                </SubmitButton>
-              )}
-
-              <TextWhite>
-                {t("shopee.login.labels.NewToShopee?")}
-                <Link to="/register">
-                  <Register>{t("shopee.login.labels.register")}</Register>
-                </Link>
-              </TextWhite>
-            </Form>
-          </CustomCard>
+            <SubmitButton type="submit">
+              {t("shopee.login.labels.register")}
+            </SubmitButton>
+            <TextWhite>
+              {t("shopee.login.labels.HadAnAccount?")}
+              <Link to="/login">
+                <Login>{t("shopee.login.labels.login")}</Login>
+              </Link>
+            </TextWhite>
+          </Form>
         </Wrapper>
-      </Root>
+      </BodyRegister>
     </MainLayout>
   );
 }
-const HeaderLogin = styled.nav`
+const HeaderRegister = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -118,43 +90,39 @@ const HeaderLeft = styled.div`
   align-items: center;
 `;
 
+const LoginLabel = styled(LargeText)`
+  font-size: 1.5rem;
+`;
 const NeedHelp = styled(NormalText)`
   color: #ee4d2d;
   font-size: 0.875rem;
   margin-right: 0.9375rem;
   cursor: pointer;
 `;
-const Root = styled.div`
+
+const BodyRegister = styled.div`
   width: 100vw;
 
   display: block;
   background-color: rgb(238, 77, 45);
 `;
 const Wrapper = styled.div`
-  padding: 4rem 0;
   margin: 0 auto;
-  min-height: 37rem;
+  min-height: 37.2rem;
   width: 60rem;
   display: flex;
   justify-content: flex-end;
   background-image: url(${BodyShopeeLogin});
 `;
 
-const LoginLabel = styled(LargeText)`
-  font-size: 1.5rem;
-  width: 100%;
-`;
-const CustomCard = styled(Card)`
-  border-radius: 0.25rem;
-  box-shadow: 0 3px 10px 0 rgb(0 0 0 / 14%);
-`;
 const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 25rem;
+  display: block;
+  background-color: #fff;
+  width: 24.8125rem;
+  border-radius: 0.25rem;
   overflow: hidden;
   box-sizing: border-box;
+  box-shadow: 0 3px 10px 0 rgb(0 0 0 / 14%);
   padding: 34px;
   margin: 60px 0;
 `;
@@ -184,7 +152,7 @@ const TextWhite = styled.p`
   text-align: center;
   color: rgba(0, 0, 0, 0.26);
 `;
-const Register = styled(NormalText)`
+const Login = styled(NormalText)`
   color: #ee4d2d;
 
   margin-right: 0.9375rem;

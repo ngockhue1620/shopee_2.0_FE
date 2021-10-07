@@ -19,6 +19,10 @@ import slider16 from "../../../assets/images/slider16.png";
 import Slider from "../../common/components/slider/Slider";
 import { useShopeeApiClient } from "../hooks/useShopeeApiClient";
 import useAsync from "../../common/hooks/useAsync";
+import { ListCategory } from "../components/category/ListCategory";
+import { useDispatch } from "react-redux";
+import { categoryActions } from "../../../store/category-slice";
+import { useSelector } from "react-redux";
 
 const listImage = [
   slider1,
@@ -38,12 +42,23 @@ const listImage = [
   slider16,
 ];
 export default function Home() {
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.category);
+  const api = useShopeeApiClient();
+  const getCategory = useAsync(async () => {
+    const result = await api.getCategory();
+
+    if (result) {
+      dispatch(categoryActions.setCategory(result));
+    }
+  }, true);
   return (
     <EmptyLayout>
       <Root>
         <ContainerSlider>
           <Slider listImage={listImage}></Slider>
         </ContainerSlider>
+        <ListCategory list={categories}></ListCategory>
       </Root>
     </EmptyLayout>
   );
@@ -56,4 +71,6 @@ const Root = styled.main`
   max-width: 1200px;
   margin: auto;
   padding-top: 20vh;
+  display: flex;
+  flex-direction: column;
 `;

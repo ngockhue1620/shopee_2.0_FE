@@ -17,7 +17,7 @@ export default function Slider(props) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setCurrentIndex((currentIndex + 1) % listImage.length);
-    }, 3000);
+    }, props.time || 3000);
     return () => {
       clearTimeout(timeout);
     };
@@ -42,7 +42,7 @@ export default function Slider(props) {
   );
 }
 
-const CustomButton = styled(Button)` 
+const CustomButton = styled(Button)`
   padding: 0;
   height: 4rem;
   min-width: 1rem;

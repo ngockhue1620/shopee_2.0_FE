@@ -1,18 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { color, spacing, theme } from "../../theme";
+import { color, spacing, theme } from "../../../theme";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import SearchIcon from "@material-ui/icons/Search";
-import { ButtonPrimary } from "../../common/components/buttons/ButtonPrimary";
+import { ButtonPrimary } from "../../../common/components/buttons/ButtonPrimary";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import shopee from "../../../assets/images/shopee.jpg";
-import { SmallText } from "../../common/components/text/SmallText";
-import { SmallestText } from "../../common/components/text/SmallestText";
+import shopee from "../../../../assets/images/shopee.jpg";
+import { SmallText } from "../../../common/components/text/SmallText";
+import { SmallestText } from "../../../common/components/text/SmallestText";
 import { useTranslation } from "react-i18next";
+import { SearchForm } from "./SearchForm";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -23,15 +24,15 @@ export default function Header() {
           <OptionLeft>
             <li>
               <Link>
-                <TextWhite>
-                  {t("shopee.header.actions.kenhNguoiBan")}
-                </TextWhite>
+                <TextWhite>{t("shopee.header.actions.kenhNguoiBan")}</TextWhite>
               </Link>
             </li>
 
             <li>
               <Link>
-                <TextWhite>{t("shopee.header.actions.troThanhNguoiBanShopee")}</TextWhite>
+                <TextWhite>
+                  {t("shopee.header.actions.troThanhNguoiBanShopee")}
+                </TextWhite>
               </Link>
             </li>
             <li>
@@ -90,12 +91,9 @@ export default function Header() {
             <Logo src={shopee} />
           </Link>
           <WrapSearch>
-            <SearchForm>
-              <input placeholder="Perfect diary giảm đến 50%"></input>
-              <CustomButton type="submit">
-                <SearchIcon style={{ fontSize: 20 }} />
-              </CustomButton>
-            </SearchForm>
+            <SearchForm
+              placeholder={t("shopee.header.labels.shopeePay&DichVuTienIch")}
+            />
             <ListCategory>
               <li>
                 <Link>
@@ -153,7 +151,7 @@ const Root = styled.header`
 
   background-color: ${color.orange1};
   position: fixed;
-  z-index:999999;
+  z-index: 999999;
 `;
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -168,13 +166,18 @@ const Navbar = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-const OptionLeft = styled.ul`
+const Option = styled.ul`
   display: flex;
   align-items: center;
-
   li {
     padding: 0 ${spacing.m};
-    border-right: 2px solid hsla(0, 0%, 100%, 0.22);
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+`;
+const OptionLeft = styled(Option)`
+  li {
     &:nth-last-child(1) {
       border: none;
       display: flex;
@@ -185,13 +188,8 @@ const OptionLeft = styled.ul`
     }
   }
 `;
-const OptionRight = styled.ul`
-  display: flex;
-  align-items: center;
-
+const OptionRight = styled(Option)`
   li {
-    padding: 0 ${spacing.m};
-
     &:nth-last-child(2) {
       border-right: 2px solid hsla(0, 0%, 100%, 0.22);
       display: flex;
@@ -215,33 +213,7 @@ const WrapSearch = styled.div`
   max-width: 70%;
   flex-grow: 1;
 `;
-const SearchForm = styled.form`
-  display: flex;
-  flex-grow: 1;
-  justify-content: space-between;
-  background-color: white;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  width: 100%;
-  height: 2.5rem;
-  padding: ${spacing.xs};
 
-  border-radius: 2px;
-  input {
-    flex-grow: 1;
-    border: none;
-    font-size: 0.9rem;
-    padding: 0 ${spacing.m};
-    &:hover,
-    :focus,
-    :active {
-      outline: none;
-    }
-  }
-`;
-const CustomButton = styled(ButtonPrimary)`
-  height: 100%;
-  flex-shrink: 0;
-`;
 const CartIcon = styled(Link)`
   color: white;
   width: 10rem;

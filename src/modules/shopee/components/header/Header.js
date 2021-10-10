@@ -14,9 +14,11 @@ import { SmallText } from "../../../common/components/text/SmallText";
 import { SmallestText } from "../../../common/components/text/SmallestText";
 import { useTranslation } from "react-i18next";
 import { SearchForm } from "./SearchForm";
+import { useLinks } from "../../../common/hooks/useLinks";
 
-export default function Header() {
+export const Header = () => {
   const { t } = useTranslation();
+  const links = useLinks();
   return (
     <Root>
       <Wrapper>
@@ -73,12 +75,12 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to={links.shopee.login()}>
                 <TextWhite>{t("shopee.header.actions.dangNhap")}</TextWhite>
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to={links.shopee.register()}>
                 <TextWhite>{t("shopee.header.actions.dangKy")}</TextWhite>
               </Link>
             </li>
@@ -145,7 +147,7 @@ export default function Header() {
       </Wrapper>
     </Root>
   );
-}
+};
 const Root = styled.header`
   width: 100vw;
 

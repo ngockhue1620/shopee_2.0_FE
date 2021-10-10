@@ -8,7 +8,6 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./modules/theme";
 import Home from "./modules/shopee/pages/Home";
-import Header from "./modules/shopee/components/header/Header";
 import Footer from "./modules/shopee/components/Footer";
 import { useShopeeApiClient } from "./modules/shopee/hooks/useShopeeApiClient";
 import Login from "./modules/shopee/pages/Login";
@@ -29,7 +28,6 @@ function App() {
               <Provider store={store}>
                 <AuthProvider>
                   <BrowserRouter>
-                    <Header />
                     <Switch>
                       <Route exact path={links.shopee.home()}>
                         <Home />

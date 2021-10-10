@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { EmptyLayout } from "../../common/layouts/EmptyLayout";
+import { HeaderLayout } from "../layouts/HeaderLayout";
 import styled from "styled-components";
 import slider1 from "../../../assets/images/slider1.jpg";
 import slider2 from "../../../assets/images/slider2.jpg";
@@ -54,12 +55,14 @@ export default function Home() {
   }, true);
   return (
     <EmptyLayout>
-      <Root>
-        <ContainerSlider>
-          <Slider listImage={listImage}></Slider>
-        </ContainerSlider>
-        <ListCategory list={categories}></ListCategory>
-      </Root>
+      <HeaderLayout>
+        <Root>
+          <ContainerSlider>
+            <Slider listImage={listImage}></Slider>
+          </ContainerSlider>
+          <ListCategory list={categories}></ListCategory>
+        </Root>
+      </HeaderLayout>
     </EmptyLayout>
   );
 }
@@ -70,7 +73,6 @@ const ContainerSlider = styled.div`
 const Root = styled.main`
   max-width: 1200px;
   margin: auto;
-  padding-top: 20vh;
   display: flex;
   flex-direction: column;
 `;

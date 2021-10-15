@@ -16,7 +16,7 @@ export const SearchForm = (props) => {
   const categories = useSelector((state) => state.category);
   const [isFocus, setIsFocus] = useState(false);
   const [searchKey, setSearchKey] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [autoCompletes, setAutoCompletes] = useState([]);
   const { register, handleSubmit, reset, getValues } = useForm();
 
   const onFocus = () => setIsFocus(true);
@@ -33,12 +33,12 @@ export const SearchForm = (props) => {
 
   useEffect(() => {
     const searchKeyLower = searchKey.trim().toLowerCase();
-    if (!searchKeyLower) setSuggestions([]);
+    if (!searchKeyLower) setAutoCompletes([]);
     else {
-      const newSuggestions = categories
+      const newAutoCompletes = categories
         .map((x) => x.name)
-        .filter((x) => x.toLowerCase().includes(searchKeyLower));
-      setSuggestions(newSuggestions);
+        .filter((x) => x.toLowerCase().startsWith(searchKeyLower));
+        setAutoCompletes(newAutoCompletes); 
     }
   }, [searchKey]);
 
@@ -69,7 +69,6 @@ export const SearchForm = (props) => {
           <CategoryItem>
             {searchKey ? (
               <>
-                {" "}
                 <StorefrontIcon sx={{ color: color.orange1 }} />
                 {t("shopee.header.labels.timShop")} "{searchKey.trim()}"
               </>
@@ -78,7 +77,7 @@ export const SearchForm = (props) => {
             )}
           </CategoryItem>
 
-          {suggestions.slice(0, 10).map((x) => (
+          {autoCompletes.slice(0, 10).map((x) => (
             <CategoryItem>{x}</CategoryItem>
           ))}
         </CategoryList>

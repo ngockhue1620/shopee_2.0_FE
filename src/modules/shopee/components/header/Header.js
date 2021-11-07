@@ -142,7 +142,7 @@ export const Header = () => {
           </WrapSearch>
 
           <CartIcon>
-            <CustomBadge badgeContent={0}>
+            <CustomBadge badgeContent={100}>
               <ShoppingCartIcon />
             </CustomBadge>
           </CartIcon>
@@ -251,7 +251,6 @@ const CustomSmallestText = styled(SmallestText)`
 const CustomBadge = styled(Badge)`
   & > span {
     background-color: white;
-    padding: 4px;
     color: ${color.orange1};
     border: 1px solid ${color.orange1};
   }

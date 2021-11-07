@@ -15,6 +15,7 @@ import { SmallestText } from "../../../common/components/text/SmallestText";
 import { useTranslation } from "react-i18next";
 import { SearchForm } from "./SearchForm";
 import { useLinks } from "../../../common/hooks/useLinks";
+import { Badge } from "@material-ui/core";
 
 export const Header = () => {
   const { t } = useTranslation();
@@ -25,29 +26,29 @@ export const Header = () => {
         <Navbar>
           <OptionLeft>
             <li>
-              <Link>
+              <Link to="#">
                 <TextWhite>{t("shopee.header.actions.kenhNguoiBan")}</TextWhite>
               </Link>
             </li>
 
             <li>
-              <Link>
+              <Link to="#">
                 <TextWhite>
                   {t("shopee.header.actions.troThanhNguoiBanShopee")}
                 </TextWhite>
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to="#">
                 <TextWhite>{t("shopee.header.actions.taiUngDung")}</TextWhite>
               </Link>
             </li>
             <li>
               <TextWhite>{t("shopee.header.labels.ketNoi")}</TextWhite>
-              <Link>
+              <Link to="#">
                 <FacebookIcon style={{ color: color.white1, fontSize: 20 }} />
               </Link>
-              <Link>
+              <Link to="#">
                 <InstagramIcon style={{ color: color.white1, fontSize: 20 }} />
               </Link>
             </li>
@@ -55,7 +56,7 @@ export const Header = () => {
 
           <OptionRight>
             <li>
-              <Link>
+              <Link to="#">
                 <TextWhite>
                   <NotificationsNoneIcon
                     style={{ color: color.white1, fontSize: 20 }}
@@ -65,7 +66,7 @@ export const Header = () => {
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to="#">
                 <TextWhite>
                   <HelpOutlineIcon
                     style={{ color: color.white1, fontSize: 20 }}
@@ -88,7 +89,7 @@ export const Header = () => {
         </Navbar>
 
         <Searchbar>
-          <Link>
+          <Link to={links.shopee.home()}>
             {/* <ShopeeImage/> */}
             <Logo src={shopee} />
           </Link>
@@ -98,42 +99,42 @@ export const Header = () => {
             />
             <ListCategory>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Áo Khoác</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Balo</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Váy</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Quần</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Bông Tẩy Trang</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Áo Phông</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Nồi Chiên Không Dầu</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Bánh Trung Thu</CustomSmallestText>
                 </Link>
               </li>
@@ -141,7 +142,9 @@ export const Header = () => {
           </WrapSearch>
 
           <CartIcon>
-            <ShoppingCartIcon />
+            <CustomBadge badgeContent={0}>
+              <ShoppingCartIcon />
+            </CustomBadge>
           </CartIcon>
         </Searchbar>
       </Wrapper>
@@ -244,4 +247,12 @@ const TextWhite = styled(SmallText)`
 
 const CustomSmallestText = styled(SmallestText)`
   color: white;
+`;
+const CustomBadge = styled(Badge)`
+  & > span {
+    background-color: white;
+    padding: 4px;
+    color: ${color.orange1};
+    border: 1px solid ${color.orange1};
+  }
 `;

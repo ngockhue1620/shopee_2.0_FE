@@ -3,13 +3,22 @@ import { ButtonPrimary } from "../../../common/components/buttons/ButtonPrimary"
 import { color, spacing } from "../../../theme";
 import SearchIcon from "@material-ui/icons/Search";
 import { Card, TextField, InputAdornment } from "@material-ui/core";
-import StorefrontIcon from "@mui/icons-material/Storefront";
+import StorefrontIcon from "@material-ui/icons/Storefront";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
+export const getAutoCompleteByKeyword = (keyword, categories) => {
+  const searchKeyLower = keyword.trim().toLowerCase();
+  if (!searchKeyLower) return [];
+  else {
+    return categories
+      .map((x) => x.name)
+      .filter((x) => x.toLowerCase().startsWith(searchKeyLower));
+  }
+};
 export const SearchForm = (props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -32,14 +41,7 @@ export const SearchForm = (props) => {
   };
 
   useEffect(() => {
-    const searchKeyLower = searchKey.trim().toLowerCase();
-    if (!searchKeyLower) setAutoCompletes([]);
-    else {
-      const newAutoCompletes = categories
-        .map((x) => x.name)
-        .filter((x) => x.toLowerCase().startsWith(searchKeyLower));
-        setAutoCompletes(newAutoCompletes); 
-    }
+    setAutoCompletes(getAutoCompleteByKeyword(searchKey, categories));
   }, [searchKey]);
 
   return (
@@ -69,7 +71,7 @@ export const SearchForm = (props) => {
           <CategoryItem>
             {searchKey ? (
               <>
-                <StorefrontIcon sx={{ color: color.orange1 }} />
+                <StorefrontIcon color="primary" />
                 {t("shopee.header.labels.timShop")} "{searchKey.trim()}"
               </>
             ) : (
@@ -77,8 +79,8 @@ export const SearchForm = (props) => {
             )}
           </CategoryItem>
 
-          {autoCompletes.slice(0, 10).map((x) => (
-            <CategoryItem>{x}</CategoryItem>
+          {autoCompletes.slice(0, 10).map((text) => (
+            <CategoryItem>{text}</CategoryItem>
           ))}
         </CategoryList>
       )}

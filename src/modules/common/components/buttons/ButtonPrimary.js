@@ -1,7 +1,8 @@
-import { Button } from "@material-ui/core"
-import styled from "styled-components"
 
-export const ButtonPrimary = styled(Button).attrs((props) => ({
+import styled from "styled-components"
+import { ButtonBase } from "./ButtonBase"
+
+export const ButtonPrimary = styled(ButtonBase).attrs((props) => ({
   color: "primary",
   variant: "contained",
   ...props,

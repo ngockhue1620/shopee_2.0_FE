@@ -14,6 +14,8 @@ import Login from "./modules/shopee/pages/Login";
 import Register from "./modules/shopee/pages/Register";
 import { AuthProvider } from "./modules/common/contexts/AuthProvider";
 import store from "./store/index";
+import { ProductPage } from "./modules/shopee/pages/ProductPage";
+import { ProductDetail } from "./modules/shopee/pages/ProductDetail";
 
 function App() {
   const links = useLinks();
@@ -37,6 +39,12 @@ function App() {
                       </Route>
                       <Route path={links.shopee.register()}>
                         <Register />
+                      </Route>
+                      <Route path={links.shopee.products()}>
+                        <ProductPage />
+                      </Route>
+                      <Route path={links.shopee.productDetail()}>
+                        <ProductDetail />
                       </Route>
                     </Switch>
                     <Footer></Footer>

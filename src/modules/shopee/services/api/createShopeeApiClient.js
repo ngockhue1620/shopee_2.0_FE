@@ -4,6 +4,8 @@ export const createShopeeApiClient = (api) => {
   return {
     login: login(api),
     getCategory: getCategory(api),
+    getProducts: getProducts(api),
+    getProductById: getProductById(api),
   };
 };
 
@@ -24,6 +26,20 @@ const login = (api) => async (data) => {
 const getCategory = (api) => async () => {
   try {
     const res = await api.get("/categories");
+
+    return res.data;
+  } catch (error) {}
+};
+const getProducts = (api) => async (params) => {
+  try {
+    const res = await api.get("/products", { params });
+
+    return res.data;
+  } catch (error) {}
+};
+const getProductById = (api) => async (id) => {
+  try {
+    const res = await api.get(`/products/${id}`);
 
     return res.data;
   } catch (error) {}

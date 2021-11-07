@@ -13,5 +13,11 @@ export const HeaderLayout = (props) => {
 
 const Layout = styled.div``;
 const Root = styled.main`
-  padding-top: 150px;
+  padding: 150px 0;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 `;

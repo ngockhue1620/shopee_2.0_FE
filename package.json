@@ -3,21 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.4.1",
-    "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@material-ui/pickers": "^3.3.10",
-    "@mui/icons-material": "^5.0.3",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.3",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
     "i18next": "^20.6.1",
     "i18next-browser-languagedetector": "^6.1.2",
+    "jest-html-reporters": "^2.1.6",
     "jwt-decode": "^3.1.2",
+    "mocha-teamcity-reporter": "^4.1.0",
     "node-sass": "4.14.1",
     "notistack": "^1.0.10",
     "react": "^17.0.2",
@@ -43,6 +44,39 @@
       "react-app/jest"
     ]
   },
+  "env": {
+    "test": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
+    }
+  },
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/proposal-class-properties",
+    "@babel/transform-regenerator",
+    "@babel/plugin-transform-template-literals",
+    "react-hot-loader/babel"
+  ],
+  "jest": {
+    "verbose": true,
+    "reporters": [
+      "default",
+      "jest-html-reporters"
+    ],
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.(js?)$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!@codetrix-studio)"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -56,6 +90,7 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^16.9.1"
+    "@types/node": "^16.9.1",
+    "jest-react-reporter": "^2.0.1"
   }
 }

@@ -33,6 +33,7 @@ export default function Slider(props) {
       <Bar>
         {listImage.map((img, idx) => (
           <ButtonPoint
+            key={img}
             isCurrent={idx === currentIndex}
             onClick={() => setCurrentIndex(idx)}
           ></ButtonPoint>
@@ -50,6 +51,7 @@ const CustomButton = styled(Button)`
   top: 50%;
   transform: translateY(-50%);
   background-color: ${color.transparent1};
+  
   display: none;
   animation-name: showSlow;
   animation-duration: 1s;
@@ -66,11 +68,13 @@ const ButtonNext = styled(CustomButton)`
 `;
 const Root = styled.div`
   position: relative;
-  width: 100%;
-  height: 100%;
-  background-image: url(${(props) => props.url});
-  background-size: cover;
-  background-repeat: no-repeat;
+  min-width: 800px;
+  max-width: 100%;
+  flex-grow: 1;
+  flex-basis: calc(var(--multiplier) * 999);
+  height: 250px;
+  background: url(${(props) => props.url}) no-repeat ;
+  background-size:cover;
   transition: background-image 300ms;
   &:hover {
     ${CustomButton} {

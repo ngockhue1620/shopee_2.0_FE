@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Header } from "../components/header/Header";
 
 // Layout for pages have header
 export const HeaderLayout = (props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Layout>
       <Header />

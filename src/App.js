@@ -16,6 +16,7 @@ import { AuthProvider } from "./modules/common/contexts/AuthProvider";
 import store from "./store/index";
 import { ProductPage } from "./modules/shopee/pages/ProductPage";
 import { ProductDetail } from "./modules/shopee/pages/ProductDetail";
+import { Cart } from "./modules/shopee/pages/Cart";
 
 function App() {
   const links = useLinks();
@@ -45,6 +46,9 @@ function App() {
                       </Route>
                       <Route path={links.shopee.productDetail()}>
                         <ProductDetail />
+                      </Route>
+                      <Route path={links.shopee.cart()}>
+                        <Cart />
                       </Route>
                     </Switch>
                     <Footer></Footer>

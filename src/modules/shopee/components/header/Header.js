@@ -16,10 +16,15 @@ import { useTranslation } from "react-i18next";
 import { SearchForm } from "./SearchForm";
 import { useLinks } from "../../../common/hooks/useLinks";
 import { Badge } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 export const Header = () => {
+  const history = useHistory();
   const { t } = useTranslation();
   const links = useLinks();
+  const cart = useSelector((state) => state.cart);
+
   return (
     <Root>
       <Wrapper>
@@ -90,7 +95,6 @@ export const Header = () => {
 
         <Searchbar>
           <Link to={links.shopee.home()}>
-            {/* <ShopeeImage/> */}
             <Logo src={shopee} />
           </Link>
           <WrapSearch>
@@ -141,8 +145,8 @@ export const Header = () => {
             </ListCategory>
           </WrapSearch>
 
-          <CartIcon>
-            <CustomBadge badgeContent={100}>
+          <CartIcon to={links.shopee.cart()}>
+            <CustomBadge badgeContent={cart.length}>
               <ShoppingCartIcon />
             </CustomBadge>
           </CartIcon>

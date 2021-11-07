@@ -16,21 +16,24 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import { useState } from "react";
 import { ButtonPrimary } from "../../common/components/buttons/ButtonPrimary";
 import { ButtonBase } from "../../common/components/buttons/ButtonBase";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../../store/cart-slice";
 
 export const ProductDetail = () => {
+  const dispatch = useDispatch();
   const api = useShopeeApiClient();
   const params = useParams();
   const getProduct = useAsync(() => api.getProductById(params.id), true);
   const product = getProduct.result;
   const [quantity, setQuantity] = useState(1);
   const onChangeQty = (e) => {
-    const qty = +e.target.value;
-
-    if (qty >= 0) {
-      setQuantity(e.target.value);
-    }
+    setQuantity(e.target.value);
   };
- 
+  const onBlur = () => {
+    const newQty = parseInt(+quantity);
+    setQuantity(Math.min(product?.quantity, Math.max(newQty, 1)));
+  };
+
   return (
     <EmptyLayout>
       <HeaderLayout>
@@ -56,6 +59,7 @@ export const ProductDetail = () => {
               <Quantity>
                 <SmallText>Số Lượng</SmallText>
                 <TextField
+                  onBlur={onBlur}
                   onChange={onChangeQty}
                   value={quantity}
                   type="number"
@@ -70,7 +74,9 @@ export const ProductDetail = () => {
                     ),
                     endAdornment: (
                       <InputAdornment
-                        onClick={() => setQuantity(Math.max(quantity + 1, 1))}
+                        onClick={() =>
+                          setQuantity(Math.min(quantity + 1, product?.quantity))
+                        }
                         position="end"
                       >
                         <AddIcon />
@@ -82,6 +88,14 @@ export const ProductDetail = () => {
               </Quantity>
               <Actions>
                 <ButtonBase
+                  onClick={() => {
+                    dispatch(
+                      cartActions.addProduct({
+                        product,
+                        quantity,
+                      })
+                    );
+                  }}
                   variant="contained"
                   color="default"
                   startIcon={<AddShoppingCartIcon color="primary" />}

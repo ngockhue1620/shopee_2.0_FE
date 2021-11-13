@@ -13,18 +13,33 @@ import { useForm } from "react-hook-form";
 import { SpinnerPrimary } from "../../common/components/spinner/SpinnerPrimary";
 import { useSnackbar } from "notistack";
 import { Card } from "@material-ui/core";
+import { useLinks } from "../../common/hooks/useLinks";
+import { useHistory } from "react-router";
+import jwt_decode from "jwt-decode";
+import { useAuth } from "../../common/contexts/AuthProvider";
 
 export default function Login() {
+  const links = useLinks();
+  const history = useHistory();
+  const { setUser } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
   const api = useShopeeApiClient();
   const login = useAsync(async (data) => {
-    const result = await api.login(data);
+    var formData = new FormData();
+    formData.append("username", data.username);
+    formData.append("password", data.password);
+    const result = await api.login(formData);
     if (result) {
       console.log(result);
+
+      localStorage.setItem("access_token", result.access_token);
+      localStorage.setItem("refresh_token", result.refresh_token);
+      setUser(jwt_decode(result.access_token).user);
       enqueueSnackbar(t("shopee.login.messages.dangNhapThanhCong"), {
         variant: "success",
       });
+      history.push(links.shopee.home());
     }
   });
   const {
@@ -35,7 +50,6 @@ export default function Login() {
   } = useForm();
   const onSubmit = async (data) => {
     login.run(data);
-    console.log(data);
   };
   return (
     <MainLayout>
@@ -46,7 +60,6 @@ export default function Login() {
         </HeaderLeft>
 
         <Link>
-          {" "}
           <NeedHelp>{t("shopee.login.actions.NeedHelp")}</NeedHelp>
         </Link>
       </HeaderLogin>
@@ -190,3 +203,4 @@ const Register = styled(NormalText)`
   margin-right: 0.9375rem;
   cursor: pointer;
 `;
+

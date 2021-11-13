@@ -11,23 +11,72 @@ import { SmallText } from "../../../common/components/text/SmallText";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { ButtonPrimary } from "../../../common/components/buttons/ButtonPrimary";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { color } from "../../../theme";
 import { useHistory } from "react-router";
 import { useLinks } from "../../../common/hooks/useLinks";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../../../store/cart-slice";
+import { applyMiddleware } from "redux";
+import { useShopeeApiClient } from "../../hooks/useShopeeApiClient";
 
 export const CartItem = (props) => {
+  const api = useShopeeApiClient();
+  const dispatch = useDispatch();
   const { cartItem } = props;
   const { product } = cartItem;
   const history = useHistory();
   const links = useLinks();
+  const [qty, setQty] = useState(cartItem?.quantity || 1);
+  const onChange = (e) => {
+    setQty(e.target.value);
+  };
+  const onBlur = async () => {
+    const newQty = Math.max(parseInt(+qty), 1);
+    dispatch(
+      cartActions.changeQty({
+        id: product?.id,
+        quantity: newQty,
+      })
+    );
+    await api.updateQtyOfProductInCart({
+      id: cartItem?.id,
+      quantity: newQty,
+    });
+  };
+  const onChangeQty = async (number) => {
+    const newQty = cartItem?.quantity + number;
+    if (newQty <= 0) {
+      dispatch(cartActions.removeProduct(product?.id));
+      await api.removeProductOutCart(cartItem?.id);
+    } else {
+      dispatch(
+        cartActions.changeQty({
+          id: product?.id,
+          quantity: newQty,
+        })
+      );
+      await api.updateQtyOfProductInCart({
+        id: cartItem?.id,
+        quantity: newQty,
+      });
+    }
+  };
+
+  const onRemoveProduct = () => {
+    dispatch(cartActions.removeProduct(product?.id));
+    api.removeProductOutCart(cartItem?.id);
+  };
+
+  useEffect(() => {
+    setQty(cartItem.quantity);
+  }, [cartItem.quantity]);
   return (
     <Root>
       <TableCell
         onClick={() => history.push(links.shopee.productDetail(product?.id))}
       >
         <ProductInfo>
-          {" "}
           <img src={product?.image} />
           <SmallText>{product?.name}</SmallText>
         </ProductInfo>
@@ -43,16 +92,18 @@ export const CartItem = (props) => {
       </TableCell>
       <TableCell align="right">
         <TextField
-          value={cartItem?.quantity}
+          onBlur={onBlur}
+          onChange={onChange}
+          value={qty}
           type="number"
           InputProps={{
             startAdornment: (
-              <InputAdornment position="start">
+              <InputAdornment onClick={() => onChangeQty(-1)} position="start">
                 <RemoveIcon />
               </InputAdornment>
             ),
             endAdornment: (
-              <InputAdornment position="end">
+              <InputAdornment onClick={() => onChangeQty(1)} position="end">
                 <AddIcon />
               </InputAdornment>
             ),
@@ -68,7 +119,7 @@ export const CartItem = (props) => {
         </Total>
       </TableCell>
       <TableCell align="right">
-        <ButtonPrimary>Xóa</ButtonPrimary>
+        <ButtonPrimary onClick={onRemoveProduct}>Xóa</ButtonPrimary>
       </TableCell>
     </Root>
   );

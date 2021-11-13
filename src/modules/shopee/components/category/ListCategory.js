@@ -42,7 +42,7 @@ export function ListCategory(props) {
           ) : (
             <ContainerCategory translateX={-currentIndex * 120}>
               {props.list.map((item) => (
-                <CategoryItem name={item.name} img={item.image} />
+                <CategoryItem key={item.id} name={item.name} img={item.image} />
               ))}
             </ContainerCategory>
           )}

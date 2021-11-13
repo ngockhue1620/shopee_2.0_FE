@@ -18,6 +18,7 @@ import { ButtonPrimary } from "../../common/components/buttons/ButtonPrimary";
 import { ButtonBase } from "../../common/components/buttons/ButtonBase";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart-slice";
+import { useSelector } from "react-redux";
 
 export const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export const ProductDetail = () => {
   const params = useParams();
   const getProduct = useAsync(() => api.getProductById(params.id), true);
   const product = getProduct.result;
+  const cart = useSelector((state) => state.cart);
   const [quantity, setQuantity] = useState(1);
   const onChangeQty = (e) => {
     setQuantity(e.target.value);
@@ -33,7 +35,32 @@ export const ProductDetail = () => {
     const newQty = parseInt(+quantity);
     setQuantity(Math.min(product?.quantity, Math.max(newQty, 1)));
   };
-
+  const onAddProductToCart = async () => {
+    dispatch(
+      cartActions.addProduct({
+        product,
+        quantity,
+      })
+    );
+    const isExistProduct = cart.find((x) => x.product.id === product?.id);
+    const newProduct = isExistProduct
+      ? await api.updateQtyOfProductInCart({
+          id: isExistProduct?.id,
+          quantity: isExistProduct.quantity + quantity,
+        })
+      : await api.addProductToCart({
+          product: product?.id,
+          quantity,
+        });
+    newProduct &&
+      !isExistProduct &&
+      dispatch(
+        cartActions.updateId({
+          productId: product?.id,
+          id: newProduct.id,
+        })
+      );
+  };
   return (
     <EmptyLayout>
       <HeaderLayout>
@@ -87,21 +114,16 @@ export const ProductDetail = () => {
                 <SmallText>{`${product?.quantity} sản phẩm có sẵn`}</SmallText>
               </Quantity>
               <Actions>
-                <ButtonBase
-                  onClick={() => {
-                    dispatch(
-                      cartActions.addProduct({
-                        product,
-                        quantity,
-                      })
-                    );
-                  }}
-                  variant="contained"
-                  color="default"
-                  startIcon={<AddShoppingCartIcon color="primary" />}
-                >
-                  Thêm Vào Giỏ Hàng
-                </ButtonBase>
+                {product && (
+                  <ButtonBase
+                    onClick={onAddProductToCart}
+                    variant="contained"
+                    color="default"
+                    startIcon={<AddShoppingCartIcon color="primary" />}
+                  >
+                    Thêm Vào Giỏ Hàng
+                  </ButtonBase>
+                )}
                 <ButtonPrimary>Mua Ngay</ButtonPrimary>
               </Actions>
             </ProductInfo>

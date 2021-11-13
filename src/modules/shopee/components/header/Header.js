@@ -15,15 +15,17 @@ import { SmallestText } from "../../../common/components/text/SmallestText";
 import { useTranslation } from "react-i18next";
 import { SearchForm } from "./SearchForm";
 import { useLinks } from "../../../common/hooks/useLinks";
-import { Badge } from "@material-ui/core";
+import { Avatar, Badge } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { useAuth } from "../../../common/contexts/AuthProvider";
 
 export const Header = () => {
   const history = useHistory();
   const { t } = useTranslation();
   const links = useLinks();
   const cart = useSelector((state) => state.cart);
+  const { user } = useAuth();
 
   return (
     <Root>
@@ -75,21 +77,36 @@ export const Header = () => {
                 <TextWhite>
                   <HelpOutlineIcon
                     style={{ color: color.white1, fontSize: 20 }}
-                  />{" "}
+                  />
                   {t("shopee.header.actions.hoTro")}
                 </TextWhite>
               </Link>
             </li>
-            <li>
-              <Link to={links.shopee.login()}>
-                <TextWhite>{t("shopee.header.actions.dangNhap")}</TextWhite>
-              </Link>
-            </li>
-            <li>
-              <Link to={links.shopee.register()}>
-                <TextWhite>{t("shopee.header.actions.dangKy")}</TextWhite>
-              </Link>
-            </li>
+            {user ? (
+              <UserInfo>
+                <CustomAvatar>
+                  {user.avatar ? (
+                    <img src={user.avatar} />
+                  ) : (
+                    user.email[0]?.toUpperCase()
+                  )}
+                </CustomAvatar>
+                <TextWhite>{user.email?.split("@")[0]}</TextWhite>
+              </UserInfo>
+            ) : (
+              <>
+                <li>
+                  <Link to={links.shopee.login()}>
+                    <TextWhite>{t("shopee.header.actions.dangNhap")}</TextWhite>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={links.shopee.register()}>
+                    <TextWhite>{t("shopee.header.actions.dangKy")}</TextWhite>
+                  </Link>
+                </li>
+              </>
+            )}
           </OptionRight>
         </Navbar>
 
@@ -258,4 +275,20 @@ const CustomBadge = styled(Badge)`
     color: ${color.orange1};
     border: 1px solid ${color.orange1};
   }
+`;
+const CustomAvatar = styled(Avatar)`
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+const UserInfo = styled.div`
+  display: flex;
+  gap: 5px;
+  padding: 0 5px;
+  align-items: center;
 `;

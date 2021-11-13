@@ -99,24 +99,24 @@ const ContainerSlider = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  --multiplier: calc(700px - 100%);
+  gap: 5px;
+  --multiplier: calc(800px - 100%);
   & > ${CustomBox} {
-    height: 250px;
-    min-width: calc(400px - 8px);
+    --multiplierImg: calc(600px - 100%);
+    flex-grow: 1;
+    min-width: 320px;
     max-width: 100%;
     flex-basis: calc(var(--multiplier) * 999);
-    flex-grow: 1;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 5px;
     img {
-      min-width: 320px;
+      height: calc((250px - 5px) / 2);
+      min-width: calc(50% - 2.5px);
       max-width: 100%;
       flex-grow: 1;
-      flex-basis: calc(var(--multiplier) * 999);
+      flex-basis: calc(var(--multiplierImg) * 999);
       object-fit: cover;
     }
   }
 `;
-

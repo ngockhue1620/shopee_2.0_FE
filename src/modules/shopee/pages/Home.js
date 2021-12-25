@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { EmptyLayout } from "../../common/layouts/EmptyLayout";
+import { HeaderLayout } from "../layouts/HeaderLayout";
 import styled from "styled-components";
 import slider1 from "../../../assets/images/slider1.jpg";
 import slider2 from "../../../assets/images/slider2.jpg";
@@ -16,6 +17,7 @@ import slider13 from "../../../assets/images/slider13.png";
 import slider14 from "../../../assets/images/slider14.png";
 import slider15 from "../../../assets/images/slider15.png";
 import slider16 from "../../../assets/images/slider16.png";
+import ngheThuatSanDeal from "../../../assets/images/nghe-thuat-san-deal.png";
 import Slider from "../../common/components/slider/Slider";
 import { useShopeeApiClient } from "../hooks/useShopeeApiClient";
 import useAsync from "../../common/hooks/useAsync";
@@ -23,6 +25,10 @@ import { ListCategory } from "../components/category/ListCategory";
 import { useDispatch } from "react-redux";
 import { categoryActions } from "../../../store/category-slice";
 import { useSelector } from "react-redux";
+import { Box, Button } from "@material-ui/core";
+import { ProductList } from "../components/product/ProductList";
+import { useHistory } from "react-router";
+import { useLinks } from "../../common/hooks/useLinks";
 
 const listImage = [
   slider1,
@@ -42,6 +48,8 @@ const listImage = [
   slider16,
 ];
 export default function Home() {
+  const history = useHistory();
+  const links = useLinks();
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category);
   const api = useShopeeApiClient();
@@ -52,25 +60,63 @@ export default function Home() {
       dispatch(categoryActions.setCategory(result));
     }
   }, true);
+  const getProducts = useAsync(
+    async () =>
+      await api.getProducts({
+        limit: 48,
+        offset: 1,
+      }),
+    true
+  );
   return (
     <EmptyLayout>
-      <Root>
+      <HeaderLayout>
         <ContainerSlider>
           <Slider listImage={listImage}></Slider>
+          <CustomBox>
+            <img src={ngheThuatSanDeal} />
+            <img src={ngheThuatSanDeal} />
+          </CustomBox>
         </ContainerSlider>
+
         <ListCategory list={categories}></ListCategory>
-      </Root>
+
+        <ProductList products={getProducts.result?.results} />
+        <Button
+          onClick={() => {
+            history.push(links.shopee.products());
+          }}
+          variant="outlined"
+        >
+          Xem thêm
+        </Button>
+      </HeaderLayout>
     </EmptyLayout>
   );
 }
+const CustomBox = styled(Box)``;
 const ContainerSlider = styled.div`
-  max-width: 800px;
-  height: 250px;
-`;
-const Root = styled.main`
-  max-width: 1200px;
-  margin: auto;
-  padding-top: 20vh;
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 5px;
+  --multiplier: calc(800px - 100%);
+  & > ${CustomBox} {
+    --multiplierImg: calc(600px - 100%);
+    flex-grow: 1;
+    min-width: 320px;
+    max-width: 100%;
+    flex-basis: calc(var(--multiplier) * 999);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    img {
+      height: calc((250px - 5px) / 2);
+      min-width: calc(50% - 2.5px);
+      max-width: 100%;
+      flex-grow: 1;
+      flex-basis: calc(var(--multiplierImg) * 999);
+      object-fit: cover;
+    }
+  }
 `;

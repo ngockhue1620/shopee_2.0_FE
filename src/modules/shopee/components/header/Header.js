@@ -14,38 +14,48 @@ import { SmallText } from "../../../common/components/text/SmallText";
 import { SmallestText } from "../../../common/components/text/SmallestText";
 import { useTranslation } from "react-i18next";
 import { SearchForm } from "./SearchForm";
+import { useLinks } from "../../../common/hooks/useLinks";
+import { Avatar, Badge } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { useAuth } from "../../../common/contexts/AuthProvider";
 
-export default function Header() {
+export const Header = () => {
+  const history = useHistory();
   const { t } = useTranslation();
+  const links = useLinks();
+  const cart = useSelector((state) => state.cart);
+  const { user } = useAuth();
+
   return (
     <Root>
       <Wrapper>
         <Navbar>
           <OptionLeft>
             <li>
-              <Link>
+              <Link to="#">
                 <TextWhite>{t("shopee.header.actions.kenhNguoiBan")}</TextWhite>
               </Link>
             </li>
 
             <li>
-              <Link>
+              <Link to="#">
                 <TextWhite>
                   {t("shopee.header.actions.troThanhNguoiBanShopee")}
                 </TextWhite>
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to="#">
                 <TextWhite>{t("shopee.header.actions.taiUngDung")}</TextWhite>
               </Link>
             </li>
             <li>
               <TextWhite>{t("shopee.header.labels.ketNoi")}</TextWhite>
-              <Link>
+              <Link to="#">
                 <FacebookIcon style={{ color: color.white1, fontSize: 20 }} />
               </Link>
-              <Link>
+              <Link to="#">
                 <InstagramIcon style={{ color: color.white1, fontSize: 20 }} />
               </Link>
             </li>
@@ -53,7 +63,7 @@ export default function Header() {
 
           <OptionRight>
             <li>
-              <Link>
+              <Link to="#">
                 <TextWhite>
                   <NotificationsNoneIcon
                     style={{ color: color.white1, fontSize: 20 }}
@@ -63,31 +73,45 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to="#">
                 <TextWhite>
                   <HelpOutlineIcon
                     style={{ color: color.white1, fontSize: 20 }}
-                  />{" "}
+                  />
                   {t("shopee.header.actions.hoTro")}
                 </TextWhite>
               </Link>
             </li>
-            <li>
-              <Link>
-                <TextWhite>{t("shopee.header.actions.dangNhap")}</TextWhite>
-              </Link>
-            </li>
-            <li>
-              <Link>
-                <TextWhite>{t("shopee.header.actions.dangKy")}</TextWhite>
-              </Link>
-            </li>
+            {user ? (
+              <UserInfo>
+                <CustomAvatar>
+                  {user.avatar ? (
+                    <img src={user.avatar} />
+                  ) : (
+                    user.email[0]?.toUpperCase()
+                  )}
+                </CustomAvatar>
+                <TextWhite>{user.email?.split("@")[0]}</TextWhite>
+              </UserInfo>
+            ) : (
+              <>
+                <li>
+                  <Link to={links.shopee.login()}>
+                    <TextWhite>{t("shopee.header.actions.dangNhap")}</TextWhite>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={links.shopee.register()}>
+                    <TextWhite>{t("shopee.header.actions.dangKy")}</TextWhite>
+                  </Link>
+                </li>
+              </>
+            )}
           </OptionRight>
         </Navbar>
 
         <Searchbar>
-          <Link>
-            {/* <ShopeeImage/> */}
+          <Link to={links.shopee.home()}>
             <Logo src={shopee} />
           </Link>
           <WrapSearch>
@@ -96,56 +120,58 @@ export default function Header() {
             />
             <ListCategory>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Áo Khoác</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Balo</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Váy</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Quần</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Bông Tẩy Trang</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Áo Phông</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Nồi Chiên Không Dầu</CustomSmallestText>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="#">
                   <CustomSmallestText>Bánh Trung Thu</CustomSmallestText>
                 </Link>
               </li>
             </ListCategory>
           </WrapSearch>
 
-          <CartIcon>
-            <ShoppingCartIcon />
+          <CartIcon to={links.shopee.cart()}>
+            <CustomBadge badgeContent={cart.length}>
+              <ShoppingCartIcon />
+            </CustomBadge>
           </CartIcon>
         </Searchbar>
       </Wrapper>
     </Root>
   );
-}
+};
 const Root = styled.header`
   width: 100vw;
 
@@ -242,4 +268,27 @@ const TextWhite = styled(SmallText)`
 
 const CustomSmallestText = styled(SmallestText)`
   color: white;
+`;
+const CustomBadge = styled(Badge)`
+  & > span {
+    background-color: white;
+    color: ${color.orange1};
+    border: 1px solid ${color.orange1};
+  }
+`;
+const CustomAvatar = styled(Avatar)`
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+const UserInfo = styled.div`
+  display: flex;
+  gap: 5px;
+  padding: 0 5px;
+  align-items: center;
 `;

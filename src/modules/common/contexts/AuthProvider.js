@@ -3,6 +3,7 @@ import { useEffect, createContext, useContext } from "react";
 import { useState } from "react";
 import { useShopeeApiClient } from "../../shopee/hooks/useShopeeApiClient";
 import useAsync from "../hooks/useAsync";
+import jwt_decode from "jwt-decode";
 
 const AuthContext = createContext({
   user: null,
@@ -36,9 +37,9 @@ export const AuthProvider = (props) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("access_token");
     if (token) {
-      // currentUser.run();
+      setUser(jwt_decode(token).user)
     }
   }, []);
 

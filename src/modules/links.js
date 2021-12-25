@@ -4,6 +4,9 @@ export const getAppLinks = () => {
     home: () => "/",
     login: () => "/login",
     register: () => "/register",
+    products: () => "/products",
+    productDetail: (id = ":id") => `/product/${id}`,
+    cart: () => "/cart",
   };
   const admin = {};
 

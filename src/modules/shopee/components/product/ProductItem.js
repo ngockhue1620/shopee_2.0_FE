@@ -8,6 +8,7 @@ import { useLinks } from "../../../common/hooks/useLinks";
 export const ProductItem = (props) => {
   const history = useHistory();
   const links = useLinks();
+  
   return (
     <Root
       onClick={() => {

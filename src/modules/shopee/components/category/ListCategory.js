@@ -96,7 +96,7 @@ const ChangeCategoryButton = styled(IconButton)`
   background: ${color.white1};
   top: 50%;
   transition: width height 0.5s;
-  z-index: 9999;
+  z-index: 50;
   svg {
     font-size: 20px;
   }

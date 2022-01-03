@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useShopeeApiClient } from "../../shopee/hooks/useShopeeApiClient";
 import useAsync from "../hooks/useAsync";
 import jwt_decode from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../../store/cart-slice";
 
 const AuthContext = createContext({
   user: null,
@@ -20,6 +22,7 @@ export const useAuth = () => {
 
 export const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
 
   const api = useShopeeApiClient();
 
@@ -30,6 +33,10 @@ export const AuthProvider = (props) => {
   //     setUser(result);
   //   }
   // });
+  const fetchCart = async () => {
+    const result = await api.getCart();
+    result && dispatch(cartActions.setCart(result));
+  };
 
   const contextValue = {
     user,
@@ -39,9 +46,13 @@ export const AuthProvider = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
-      setUser(jwt_decode(token).user)
+      setUser(jwt_decode(token).user);
     }
   }, []);
+
+  useEffect(() => {
+    user && fetchCart();
+  }, [user]);
 
   return (
     <AuthContext.Provider value={contextValue}>

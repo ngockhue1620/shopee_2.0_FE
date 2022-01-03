@@ -21,6 +21,7 @@ import { applyMiddleware } from "redux";
 import { useShopeeApiClient } from "../../hooks/useShopeeApiClient";
 
 export const CartItem = (props) => {
+  const regexNumber = /^[0-9]+$/;
   const api = useShopeeApiClient();
   const dispatch = useDispatch();
   const { cartItem } = props;
@@ -32,17 +33,26 @@ export const CartItem = (props) => {
     setQty(e.target.value);
   };
   const onBlur = async () => {
-    const newQty = Math.max(parseInt(+qty), 1);
-    dispatch(
-      cartActions.changeQty({
-        id: product?.id,
-        quantity: newQty,
-      })
-    );
-    await api.updateQtyOfProductInCart({
-      id: cartItem?.id,
-      quantity: newQty,
-    });
+    setQty(cartItem.quantity);
+  };
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (regexNumber.test(qty) && +qty > 0) {
+      dispatch(
+        cartActions.changeQty({
+          id: product?.id,
+          quantity: +qty,
+        })
+      );
+      await api.updateQtyOfProductInCart({
+        id: cartItem?.id,
+        quantity: +qty,
+      });
+    } else {
+      onBlur();
+    }
+
+    document.activeElement.blur();
   };
   const onChangeQty = async (number) => {
     const newQty = cartItem?.quantity + number;
@@ -91,24 +101,29 @@ export const CartItem = (props) => {
         </SmallText>
       </TableCell>
       <TableCell align="right">
-        <TextField
-          onBlur={onBlur}
-          onChange={onChange}
-          value={qty}
-          type="number"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment onClick={() => onChangeQty(-1)} position="start">
-                <RemoveIcon />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment onClick={() => onChangeQty(1)} position="end">
-                <AddIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
+        <form onSubmit={onSubmit}>
+          <TextField
+            onBlur={onBlur}
+            onChange={onChange}
+            value={qty}
+            type="number"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment
+                  onClick={() => onChangeQty(-1)}
+                  position="start"
+                >
+                  <RemoveIcon />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment onClick={() => onChangeQty(1)} position="end">
+                  <AddIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </form>
       </TableCell>
       <TableCell align="right">
         <Total>

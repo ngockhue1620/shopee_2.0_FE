@@ -1,4 +1,11 @@
-import { Card, InputAdornment, TextField, Button } from "@material-ui/core";
+import {
+  Card,
+  InputAdornment,
+  TextField,
+  Button,
+  Modal,
+  Grid,
+} from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { Rating } from "@material-ui/lab";
 import { useParams } from "react-router";
@@ -19,15 +26,53 @@ import { ButtonBase } from "../../common/components/buttons/ButtonBase";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart-slice";
 import { useSelector } from "react-redux";
+import { useAuth } from "../../common/contexts/AuthProvider";
+import { useHistory } from "react-router";
+import { useSnackbar } from "notistack";
 
 export const ProductDetail = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { user } = useAuth();
   const api = useShopeeApiClient();
   const params = useParams();
+  const { enqueueSnackbar } = useSnackbar();
   const getProduct = useAsync(() => api.getProductById(params.id), true);
+  const handleCheckout = useAsync(async (data) => {
+    const success = await api.checkoutOnlyOneProduct(data);
+    if (success) {
+      handleClose();
+      enqueueSnackbar("Đặt hàng thành công !", {
+        variant: "success",
+      });
+    } else {
+      enqueueSnackbar("Đặt hàng thất bại !", {
+        variant: "error",
+      });
+    }
+  });
   const product = getProduct.result;
   const cart = useSelector((state) => state.cart);
   const [quantity, setQuantity] = useState(1);
+  const [dataCheckout, setDataCheckout] = useState({
+    address: "",
+    note: "",
+    quantity: "",
+  });
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const onChange = (e) => {
+    setDataCheckout({
+      ...dataCheckout,
+      [e.target.name]: e.target.value,
+    });
+  };
   const onChangeQty = (e) => {
     setQuantity(e.target.value);
   };
@@ -36,30 +81,52 @@ export const ProductDetail = () => {
     setQuantity(Math.min(product?.quantity, Math.max(newQty, 1)));
   };
   const onAddProductToCart = async () => {
-    dispatch(
-      cartActions.addProduct({
-        product,
-        quantity,
-      })
-    );
-    const isExistProduct = cart.find((x) => x.product.id === product?.id);
-    const newProduct = isExistProduct
-      ? await api.updateQtyOfProductInCart({
-          id: isExistProduct?.id,
-          quantity: isExistProduct.quantity + quantity,
-        })
-      : await api.addProductToCart({
-          product: product?.id,
-          quantity,
-        });
-    newProduct &&
-      !isExistProduct &&
+    if (user) {
       dispatch(
-        cartActions.updateId({
-          productId: product?.id,
-          id: newProduct.id,
+        cartActions.addProduct({
+          product,
+          quantity,
         })
       );
+      const isExistProduct = cart.find((x) => x.product.id === product?.id);
+      const newProduct = isExistProduct
+        ? await api.updateQtyOfProductInCart({
+            id: isExistProduct?.id,
+            quantity: isExistProduct.quantity + quantity,
+          })
+        : await api.addProductToCart({
+            product: product?.id,
+            quantity,
+          });
+      newProduct &&
+        !isExistProduct &&
+        dispatch(
+          cartActions.updateId({
+            productId: product?.id,
+            id: newProduct.id,
+          })
+        );
+    } else {
+      history.push("/login");
+    }
+  };
+  const checkout = (e) => {
+    e.preventDefault();
+    const quantity = +dataCheckout.quantity;
+    if (quantity <= 0 || quantity % 1 !== 0) {
+      enqueueSnackbar("Số lượng không hợp lệ!", {
+        variant: "error",
+      });
+      return;
+    }
+
+    handleCheckout.run({
+      id: params.id,
+      body: {
+        ...dataCheckout,
+        quantity,
+      },
+    });
   };
   return (
     <EmptyLayout>
@@ -124,7 +191,47 @@ export const ProductDetail = () => {
                     Thêm Vào Giỏ Hàng
                   </ButtonBase>
                 )}
-                <ButtonPrimary>Mua Ngay</ButtonPrimary>
+                <ButtonPrimary onClick={handleOpen}>Mua Ngay</ButtonPrimary>
+                <Modal open={open} onClose={handleClose}>
+                  <CustomGrid contained="true">
+                    <Grid item xs={12} sm={7} md={6} lg={5}>
+                      <ModalBody>
+                        <form onSubmit={checkout}>
+                          <TextField
+                            name="address"
+                            label="Địa chỉ"
+                            variant="outlined"
+                            required
+                            onChange={onChange}
+                            value={dataCheckout.address}
+                          />
+                          <TextField
+                            onChange={onChange}
+                            name="note"
+                            label="Ghi chú"
+                            variant="outlined"
+                            value={dataCheckout.note}
+                          />
+                          <TextField
+                            type="number"
+                            required
+                            onChange={onChange}
+                            name="quantity"
+                            label="Số lượng"
+                            variant="outlined"
+                            value={dataCheckout.quantity}
+                          />
+                          <ButtonPrimary
+                            disable={handleCheckout.loading}
+                            type="submit"
+                          >
+                            Đặt hàng
+                          </ButtonPrimary>
+                        </form>
+                      </ModalBody>
+                    </Grid>
+                  </CustomGrid>
+                </Modal>
               </Actions>
             </ProductInfo>
           </ProductData>
@@ -133,6 +240,30 @@ export const ProductDetail = () => {
     </EmptyLayout>
   );
 };
+const ModalBody = styled(Card)`
+  box-shadow: none;
+
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  ${NormalText} {
+    height: 100px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+`;
+const CustomGrid = styled(Grid)`
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
 const Root = styled(Card)`
   width: 100%;
   box-shadow: none;

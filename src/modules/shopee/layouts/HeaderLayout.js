@@ -17,7 +17,7 @@ export const HeaderLayout = (props) => {
 
 const Layout = styled.div``;
 const Root = styled.main`
-  padding: 150px 0;
+  padding: 1rem 0;
   max-width: 1200px;
   margin: auto;
   display: flex;

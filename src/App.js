@@ -22,14 +22,7 @@ import { cartActions } from "./store/cart-slice";
 import useAsync from "./modules/common/hooks/useAsync";
 
 function App() {
-  const dispatch = useDispatch();
   const links = useLinks();
-  const api = useShopeeApiClient();
-  useAsync(async () => {
-    const cart = await api.getCart();
-    cart && dispatch(cartActions.setCart(cart));
-  }, true);
-
   return (
     <>
       <SnackbarProvider maxSnack={3}>

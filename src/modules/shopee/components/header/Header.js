@@ -15,7 +15,7 @@ import { SmallestText } from "../../../common/components/text/SmallestText";
 import { useTranslation } from "react-i18next";
 import { SearchForm } from "./SearchForm";
 import { useLinks } from "../../../common/hooks/useLinks";
-import { Avatar, Badge } from "@material-ui/core";
+import { Avatar, Badge, Menu, MenuItem } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useAuth } from "../../../common/contexts/AuthProvider";
@@ -25,7 +25,21 @@ export const Header = () => {
   const { t } = useTranslation();
   const links = useLinks();
   const cart = useSelector((state) => state.cart);
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    history.push("/login");
+  };
 
   return (
     <Root>
@@ -83,16 +97,28 @@ export const Header = () => {
               </Link>
             </li>
             {user ? (
-              <UserInfo>
-                <CustomAvatar>
-                  {user.avatar ? (
-                    <img src={user.avatar} />
-                  ) : (
-                    user.email[0]?.toUpperCase()
-                  )}
-                </CustomAvatar>
-                <TextWhite>{user.email?.split("@")[0]}</TextWhite>
-              </UserInfo>
+              <>
+                <UserInfo onClick={handleClick}>
+                  <CustomAvatar>
+                    {user.avatar ? (
+                      <img src={user.avatar} />
+                    ) : (
+                      user.email[0]?.toUpperCase()
+                    )}
+                  </CustomAvatar>
+                  <TextWhite>{user.email?.split("@")[0]}</TextWhite>
+                </UserInfo>
+                <Menu
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>Tài khoản của tôi</MenuItem>
+                  <MenuItem onClick={handleClose}>Đơn mua</MenuItem>
+                  <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
+                </Menu>
+              </>
             ) : (
               <>
                 <li>
@@ -174,10 +200,10 @@ export const Header = () => {
 };
 const Root = styled.header`
   width: 100vw;
-
   background-color: ${color.orange1};
-  position: fixed;
-  z-index: 999999;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 `;
 const Wrapper = styled.div`
   max-width: 1200px;

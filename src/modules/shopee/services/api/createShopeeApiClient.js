@@ -1,4 +1,3 @@
-import { AxiosInstance } from "axios";
 import jwt_decode from "jwt-decode";
 
 export const createShopeeApiClient = (api) => {
@@ -11,6 +10,8 @@ export const createShopeeApiClient = (api) => {
     removeProductOutCart: removeProductOutCart(api),
     updateQtyOfProductInCart: updateQtyOfProductInCart(api),
     addProductToCart: addProductToCart(api),
+    checkout: checkout(api),
+    checkoutOnlyOneProduct: checkoutOnlyOneProduct(api),
   };
 };
 
@@ -68,9 +69,7 @@ const addProductToCart = (api) => async (data) => {
     });
 
     return res.data;
-  } catch (error) {
-  
-  }
+  } catch (error) {}
 };
 
 const updateQtyOfProductInCart = (api) => async (data) => {
@@ -80,9 +79,7 @@ const updateQtyOfProductInCart = (api) => async (data) => {
     });
 
     return res.data;
-  } catch (error) {
-   
-  }
+  } catch (error) {}
 };
 
 const removeProductOutCart = (api) => async (id) => {
@@ -90,7 +87,20 @@ const removeProductOutCart = (api) => async (id) => {
     const res = await api.delete(`/users/cart/${id}`);
 
     return true;
-  } catch (error) {
-    
-  }
+  } catch (error) {}
+};
+
+const checkout = (api) => async (data) => {
+  try {
+    const res = await api.post(`/order/`, data);
+
+    return true;
+  } catch (error) {}
+};
+const checkoutOnlyOneProduct = (api) => async (data) => {
+  try {
+    const res = await api.post(`/products/${data.id}/checkout/`, data.body);
+
+    return true;
+  } catch (error) {}
 };

@@ -132,6 +132,12 @@ export const ProductDetail = () => {
       });
       return;
     }
+    if (dataCheckout.address.trim().length === 0) {
+      enqueueSnackbar("Địa chỉ không hợp lệ!", {
+        variant: "error",
+      });
+      return;
+    }
 
     handleCheckout.run({
       id: params.id,

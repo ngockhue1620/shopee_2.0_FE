@@ -63,6 +63,12 @@ export const Cart = () => {
 
   const handleCheckout = (e) => {
     e.preventDefault();
+    if (dataCheckout.address.trim().length === 0) {
+      enqueueSnackbar("Địa chỉ không hợp lệ !", {
+        variant: "error",
+      });
+      return;
+    }
     checkout.run(dataCheckout);
   };
 

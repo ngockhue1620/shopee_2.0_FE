@@ -45,6 +45,11 @@ export const ProductDetail = () => {
       enqueueSnackbar("Đặt hàng thành công !", {
         variant: "success",
       });
+      setDataCheckout({
+        address: "",
+        note: "",
+        quantity: "",
+      });
     } else {
       enqueueSnackbar("Đặt hàng thất bại !", {
         variant: "error",
@@ -61,6 +66,10 @@ export const ProductDetail = () => {
   });
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
+    setDataCheckout({
+      ...dataCheckout,
+      quantity,
+    });
     setOpen(true);
   };
 
@@ -79,6 +88,10 @@ export const ProductDetail = () => {
   const onBlur = () => {
     const newQty = parseInt(+quantity);
     setQuantity(Math.min(product?.quantity, Math.max(newQty, 1)));
+  };
+  const onSubmitQuantity = (e) => {
+    e.preventDefault();
+    onBlur();
   };
   const onAddProductToCart = async () => {
     if (user) {
@@ -150,7 +163,7 @@ export const ProductDetail = () => {
                   currency: "VND",
                 })}
               </LargeText>
-              <Quantity>
+              <Quantity onSubmit={onSubmitQuantity}>
                 <SmallText>Số Lượng</SmallText>
                 <TextField
                   onBlur={onBlur}
@@ -316,7 +329,7 @@ const Rate = styled.div`
     font-size: 25px;
   }
 `;
-const Quantity = styled.div`
+const Quantity = styled.form`
   display: flex;
   align-items: flex-end;
   gap: 20px;

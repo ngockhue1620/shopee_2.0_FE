@@ -40,6 +40,10 @@ export default function Login() {
         variant: "success",
       });
       history.push(links.shopee.home());
+    } else {
+      enqueueSnackbar("Tài khoản hoặc mật khẩu không chính xác !", {
+        variant: "error",
+      });
     }
   });
   const {
@@ -55,7 +59,10 @@ export default function Login() {
     <MainLayout>
       <HeaderLogin>
         <HeaderLeft>
-          <Logo src={Shopee2}></Logo>
+          <Link to="/">
+            <Logo src={Shopee2}></Logo>
+          </Link>
+
           <LoginLabel>{t("shopee.login.labels.login")}</LoginLabel>
         </HeaderLeft>
 
@@ -203,4 +210,3 @@ const Register = styled(NormalText)`
   margin-right: 0.9375rem;
   cursor: pointer;
 `;
-

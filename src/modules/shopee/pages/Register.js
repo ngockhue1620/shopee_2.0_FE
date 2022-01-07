@@ -11,20 +11,25 @@ import { useShopeeApiClient } from "../hooks/useShopeeApiClient";
 import useAsync from "../../common/hooks/useAsync";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
+import { useSnackbar } from "notistack";
 export default function Register() {
+  const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
   const api = useShopeeApiClient();
   const history = useHistory();
   const registerUser = useAsync(async (data) => {
-    console.log("data2", data)
     const result = await api.registerUser(data);
-    console.log(result)
-    if (result ===true) {
-      
+    console.log(result);
+    if (result === true) {
       history.push("/login");
-      alert("Success")
+
+      enqueueSnackbar("Đăng ký thành công !", {
+        variant: "success",
+      });
     } else {
-      alert(result)
+      enqueueSnackbar(result, {
+        variant: "error",
+      });
     }
   });
   const {
@@ -34,20 +39,20 @@ export default function Register() {
     reset,
   } = useForm();
   const onSubmit = async (data) => {
-    console.log("khue",data)
+    console.log("khue", data);
     registerUser.run(data);
-    reset();
   };
   return (
     <MainLayout>
       <HeaderRegister>
         <HeaderLeft>
-          <Logo src={Shopee2}></Logo>
+          <Link to="/">
+            <Logo src={Shopee2}></Logo>
+          </Link>
           <LoginLabel>{t("shopee.login.labels.register")}</LoginLabel>
         </HeaderLeft>
 
         <Link>
-          {" "}
           <NeedHelp>{t("shopee.login.actions.NeedHelp")}</NeedHelp>
         </Link>
       </HeaderRegister>
@@ -142,7 +147,7 @@ const Wrapper = styled.div`
   width: 60rem;
   display: flex;
   justify-content: flex-end;
-  background-image: url(${BodyShopeeLogin});
+  background: url(${BodyShopeeLogin}) no-repeat;
 `;
 
 const Form = styled.form`

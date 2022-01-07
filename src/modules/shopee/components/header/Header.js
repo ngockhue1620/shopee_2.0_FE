@@ -38,6 +38,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     localStorage.clear();
+    setUser(null);
     history.push("/login");
   };
 
@@ -47,31 +48,27 @@ export const Header = () => {
         <Navbar>
           <OptionLeft>
             <li>
-              <Link to="#">
+              <a
+                href="https://banhang.shopee.vn/portal/onboarding/"
+                target="blank"
+              >
                 <TextWhite>{t("shopee.header.actions.kenhNguoiBan")}</TextWhite>
-              </Link>
+              </a>
             </li>
 
             <li>
-              <Link to="#">
-                <TextWhite>
-                  {t("shopee.header.actions.troThanhNguoiBanShopee")}
-                </TextWhite>
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
+              <a href="https://shopee.vn/web" target="blank ">
                 <TextWhite>{t("shopee.header.actions.taiUngDung")}</TextWhite>
-              </Link>
+              </a>
             </li>
             <li>
               <TextWhite>{t("shopee.header.labels.ketNoi")}</TextWhite>
-              <Link to="#">
+              <a target="blank" href="https://www.facebook.com/ShopeeVN">
                 <FacebookIcon style={{ color: color.white1, fontSize: 20 }} />
-              </Link>
-              <Link to="#">
+              </a>
+              <a target="blank" href="https://www.instagram.com/Shopee_VN/">
                 <InstagramIcon style={{ color: color.white1, fontSize: 20 }} />
-              </Link>
+              </a>
             </li>
           </OptionLeft>
 
@@ -87,14 +84,14 @@ export const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <a href="https://help.shopee.vn/vn/s/" target="blank">
                 <TextWhite>
                   <HelpOutlineIcon
                     style={{ color: color.white1, fontSize: 20 }}
                   />
                   {t("shopee.header.actions.hoTro")}
                 </TextWhite>
-              </Link>
+              </a>
             </li>
             {user ? (
               <>
@@ -103,10 +100,12 @@ export const Header = () => {
                     {user.avatar ? (
                       <img src={user.avatar} />
                     ) : (
-                      user.email[0]?.toUpperCase()
+                      user.first_name[0]?.toUpperCase()
                     )}
                   </CustomAvatar>
-                  <TextWhite>{user.email?.split("@")[0]}</TextWhite>
+                  <TextWhite>
+                    {`${user.first_name} ${user.last_name}`}
+                  </TextWhite>
                 </UserInfo>
                 <Menu
                   anchorEl={anchorEl}

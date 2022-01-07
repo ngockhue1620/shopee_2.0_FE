@@ -212,44 +212,40 @@ export const ProductDetail = () => {
                 )}
                 <ButtonPrimary onClick={handleOpen}>Mua Ngay</ButtonPrimary>
                 <Modal open={open} onClose={handleClose}>
-                  <CustomGrid contained="true">
-                    <Grid item xs={12} sm={7} md={6} lg={5}>
-                      <ModalBody>
-                        <form onSubmit={checkout}>
-                          <TextField
-                            name="address"
-                            label="Địa chỉ"
-                            variant="outlined"
-                            required
-                            onChange={onChange}
-                            value={dataCheckout.address}
-                          />
-                          <TextField
-                            onChange={onChange}
-                            name="note"
-                            label="Ghi chú"
-                            variant="outlined"
-                            value={dataCheckout.note}
-                          />
-                          <TextField
-                            type="number"
-                            required
-                            onChange={onChange}
-                            name="quantity"
-                            label="Số lượng"
-                            variant="outlined"
-                            value={dataCheckout.quantity}
-                          />
-                          <ButtonPrimary
-                            disable={handleCheckout.loading}
-                            type="submit"
-                          >
-                            Đặt hàng
-                          </ButtonPrimary>
-                        </form>
-                      </ModalBody>
-                    </Grid>
-                  </CustomGrid>
+                  <ModalBody>
+                    <form onSubmit={checkout}>
+                      <TextField
+                        name="address"
+                        label="Địa chỉ"
+                        variant="outlined"
+                        required
+                        onChange={onChange}
+                        value={dataCheckout.address}
+                      />
+                      <TextField
+                        onChange={onChange}
+                        name="note"
+                        label="Ghi chú"
+                        variant="outlined"
+                        value={dataCheckout.note}
+                      />
+                      <TextField
+                        type="number"
+                        required
+                        onChange={onChange}
+                        name="quantity"
+                        label="Số lượng"
+                        variant="outlined"
+                        value={dataCheckout.quantity}
+                      />
+                      <ButtonPrimary
+                        disable={handleCheckout.loading}
+                        type="submit"
+                      >
+                        Đặt hàng
+                      </ButtonPrimary>
+                    </form>
+                  </ModalBody>
                 </Modal>
               </Actions>
             </ProductInfo>
@@ -261,7 +257,11 @@ export const ProductDetail = () => {
 };
 const ModalBody = styled(Card)`
   box-shadow: none;
-
+  width: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -275,14 +275,7 @@ const ModalBody = styled(Card)`
     gap: 1rem;
   }
 `;
-const CustomGrid = styled(Grid)`
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
+
 const Root = styled(Card)`
   width: 100%;
   box-shadow: none;

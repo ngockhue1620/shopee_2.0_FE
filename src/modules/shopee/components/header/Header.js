@@ -33,6 +33,7 @@ export const Header = () => {
   };
 
   const handleClose = () => {
+    history.push('/order')
     setAnchorEl(null);
   };
 

@@ -20,7 +20,7 @@ import { useShopeeApiClient } from "../hooks/useShopeeApiClient";
 import { HeaderLayout } from "../layouts/HeaderLayout";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonPrimary } from "../../common/components/buttons/ButtonPrimary";
 import { ButtonBase } from "../../common/components/buttons/ButtonBase";
 import { useDispatch } from "react-redux";
@@ -29,39 +29,36 @@ import { useSelector } from "react-redux";
 import { useAuth } from "../../common/contexts/AuthProvider";
 import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
+import OrderItem from "../components/order/OrderItem";
 
 export const HistoryOrder = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  
+  const api = useShopeeApiClient();
+  const { enqueueSnackbar } = useSnackbar();
+  const [orders, setOrders] = useState([]);
+  const fetchOrders = async () => {
+    const result = await api.getHistoryOrder();
+    result && setOrders(result);
+    console.log(result);
+  };
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
   return (
     <EmptyLayout>
       <HeaderLayout>
         <Root>
-          
+          <OrderItem />
         </Root>
       </HeaderLayout>
     </EmptyLayout>
   );
 };
 
-const Root = styled(Card)`
+const Root = styled.div`
   width: 100%;
-  box-shadow: none;
-  border-radius: 4px;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-  }
-
-  input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
-  }
 `;
 const ProductData = styled.div`
   width: 100%;

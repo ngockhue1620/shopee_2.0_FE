@@ -66,6 +66,10 @@ export const ProductDetail = () => {
   });
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
+    if (!user) {
+      history.push("/login");
+      return;
+    }
     setDataCheckout({
       ...dataCheckout,
       quantity,

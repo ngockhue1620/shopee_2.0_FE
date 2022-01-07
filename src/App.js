@@ -20,6 +20,7 @@ import { Cart } from "./modules/shopee/pages/Cart";
 import { useEffect } from "react";
 import { cartActions } from "./store/cart-slice";
 import useAsync from "./modules/common/hooks/useAsync";
+import { HistoryOrder } from "./modules/shopee/pages/HistoryOrder";
 
 function App() {
   const links = useLinks();
@@ -49,6 +50,9 @@ function App() {
                     </Route>
                     <Route path={links.shopee.cart()}>
                       <Cart />
+                    </Route>
+                    <Route path="/order">
+                      <HistoryOrder />
                     </Route>
                   </Switch>
                   <Footer></Footer>

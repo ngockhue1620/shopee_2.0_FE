@@ -11,13 +11,14 @@ import { LargeText } from "../../../common/components/text/LargeText";
 import { NormalText } from "../../../common/components/text/NormalText";
 
 export default function OrderItem(props) {
+  const { order } = props;
   return (
     <div>
       <OrderInfo>
         <Head>
           <ShopInfo>
             <Storefront style={{ fontSize: 20 }} />
-            <SmallText>lalaLuna.Beaute</SmallText>
+            <SmallText>{order.product__shop__name}</SmallText>
             <ButtonPrimary startIcon={<QuestionAnswerIcon />}>
               Chat
             </ButtonPrimary>
@@ -32,37 +33,69 @@ export default function OrderItem(props) {
         </Head>
         <ProductInfo>
           <div>
-            <img src="https://cf.shopee.vn/file/9fa07e5f01fbeb5ae4577bcba96adab9_tn" />
+            <img src={order.product__image} />
             <div>
-              <NormalText>Kem duong</NormalText>
-              <SmallText>x1</SmallText>
+              <NormalText>{order.product__name}</NormalText>
+              <SmallText>x{order.quantity}</SmallText>
             </div>
           </div>
-          <SmallText>292.000</SmallText>
+          <SmallText>
+            {order.price.toLocaleString("vi", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </SmallText>
         </ProductInfo>
       </OrderInfo>
       <PriceInfo>
-        <BoxLeft>
+        <div>
           <SmallText>Không nhận được đánh giá</SmallText>
-        </BoxLeft>
-        <BoxRight>
+        </div>
+        <div>
           <Price>
             <SmallText>Tổng số tiền :</SmallText>
-            <LargeText>285000</LargeText>
+            <LargeText>
+              {(order.price * order.quantity).toLocaleString("vi", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </LargeText>
           </Price>
           <Actions>
             <ButtonPrimary>Mua lại</ButtonPrimary>
             <Button>Liên Hệ Người Bán</Button>
           </Actions>
-        </BoxRight>
+        </div>
       </PriceInfo>
     </div>
   );
 }
-const Price = styled.div``;
-const Actions = styled.div``;
-const BoxLeft = styled.div``;
-const BoxRight = styled.div``;
+const Price = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  ${LargeText} {
+    color: #ee4d2d;
+  }
+`;
+const Actions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  button {
+    font-weight: 400;
+    font-size: 15px;
+    text-transform: capitalize;
+    box-shadow: none;
+    border-radius: 0;
+
+    :last-child {
+      border: 1px solid rgba(0, 0, 0, 0.09);
+    }
+  }
+`;
 const PriceInfo = styled.div`
   display: flex;
   justify-content: space-between;

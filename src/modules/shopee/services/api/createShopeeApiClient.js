@@ -12,6 +12,7 @@ export const createShopeeApiClient = (api) => {
     addProductToCart: addProductToCart(api),
     checkout: checkout(api),
     checkoutOnlyOneProduct: checkoutOnlyOneProduct(api),
+    registerUser: registerUser(api),
   };
 };
 
@@ -104,3 +105,18 @@ const checkoutOnlyOneProduct = (api) => async (data) => {
     return true;
   } catch (error) {}
 };
+
+const registerUser = (api) => async (data) => {
+  console.log(data)
+  try {
+    const result = await api.post('https://shopee20.herokuapp.com/api/v1/users/', data);
+    return true
+  } catch (error) {
+    if(error.mess){
+      return error.mess
+    } else {
+      return error.username[0]
+    }
+    
+  }
+}

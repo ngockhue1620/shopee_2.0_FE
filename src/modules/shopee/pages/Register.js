@@ -10,12 +10,21 @@ import BodyShopeeLogin from "../../../assets/images/BodyShopeeLogin.png";
 import { useShopeeApiClient } from "../hooks/useShopeeApiClient";
 import useAsync from "../../common/hooks/useAsync";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router";
 export default function Register() {
   const { t } = useTranslation();
   const api = useShopeeApiClient();
-  const login = useAsync(async (data) => {
-    const result = await api.login(data);
-    if (result) {
+  const history = useHistory();
+  const registerUser = useAsync(async (data) => {
+    console.log("data2", data)
+    const result = await api.registerUser(data);
+    console.log(result)
+    if (result ===true) {
+      
+      history.push("/login");
+      alert("Success")
+    } else {
+      alert(result)
     }
   });
   const {
@@ -25,7 +34,8 @@ export default function Register() {
     reset,
   } = useForm();
   const onSubmit = async (data) => {
-    await login(data.email, data.password);
+    console.log("khue",data)
+    registerUser.run(data);
     reset();
   };
   return (
@@ -45,19 +55,39 @@ export default function Register() {
         <Wrapper>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <LoginLabel>{t("shopee.login.labels.register")}</LoginLabel>
-
             <InputLogin
-              id="email"
-              aria-invalid={errors.email ? "true" : "false"}
-              type="email"
-              placeholder="Email đăng nhập"
+              id="firstName"
+              {...register("first_name")}
+              type="text"
+              placeholder="First Name"
+            />
+            <InputLogin
+              id="lastName"
+              {...register("last_name")}
+              type="text"
+              placeholder="Last Name"
+            />
+            <InputLogin
+              id="userName"
+              {...register("username")}
+              type="text"
+              placeholder="User Name"
             />
 
             <InputLogin
               id="password"
               aria-invalid={errors.passward ? "true" : "false"}
+              {...register("password")}
               type="password"
-              placeholder="Mật khẩu"
+              placeholder="Password"
+            />
+
+            <InputLogin
+              id="passwordConfim"
+              aria-invalid={errors.passward ? "true" : "false"}
+              {...register("password_again")}
+              type="password"
+              placeholder="Password confimation"
             />
 
             <SubmitButton type="submit">

@@ -1,14 +1,9 @@
-import { getAutoCompleteByKeyword } from "./modules/shopee/components/header/SearchForm";
+import { render, screen } from '@testing-library/react';
+import App from './App';
+import { CartItem } from './modules/shopee/components/cart/CartItem';
 
-// etc.
-describe("funtion getAutoComplete()", () => {
-
-  it("empty", () => {
-    const result = getAutoCompleteByKeyword("");
-    expect(result).toBe([]);
-  });
-  // it("renders learn react link", () => {
-  //   const linkElement = getAutoCompleteByKeyword("");
-  //   expect(true).toBe(true);
-  // });
+test('renders learn react link', () => {
+  render(<CartItem />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
 });

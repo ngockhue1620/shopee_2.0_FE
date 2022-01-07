@@ -83,56 +83,50 @@ export const Cart = () => {
           </NormalText>
           <ButtonPrimary onClick={handleOpen}>Mua hàng</ButtonPrimary>
           <Modal open={open} onClose={handleClose}>
-            <CustomGrid contained="true">
-              <Grid item xs={12} sm={7} md={6} lg={5}>
-                <ModalBody>
-                  {cart.length > 0 ? (
-                    <form onSubmit={handleCheckout}>
-                      <TextField
-                        name="address"
-                        label="Địa chỉ"
-                        variant="outlined"
-                        required
-                        onChange={onChange}
-                        value={dataCheckout.address}
-                      />
-                      <TextField
-                        onChange={onChange}
-                        name="note"
-                        label="Ghi chú"
-                        variant="outlined"
-                        value={dataCheckout.note}
-                      />
-                      <ButtonPrimary disable={checkout.loading} type="submit">
-                        Đặt hàng
-                      </ButtonPrimary>
-                    </form>
-                  ) : (
-                    <>
-                      <NormalText>
-                        Bạn vẫn chưa chọn sản phẩm nào để mua.
-                      </NormalText>
-                      <ButtonPrimary onClick={handleClose}>OK</ButtonPrimary>
-                    </>
-                  )}
-                </ModalBody>
-              </Grid>
-            </CustomGrid>
+            <ModalBody>
+              {cart.length > 0 ? (
+                <form onSubmit={handleCheckout}>
+                  <TextField
+                    name="address"
+                    label="Địa chỉ"
+                    variant="outlined"
+                    required
+                    onChange={onChange}
+                    value={dataCheckout.address}
+                  />
+                  <TextField
+                    onChange={onChange}
+                    name="note"
+                    label="Ghi chú"
+                    variant="outlined"
+                    value={dataCheckout.note}
+                  />
+                  <ButtonPrimary disable={checkout.loading} type="submit">
+                    Đặt hàng
+                  </ButtonPrimary>
+                </form>
+              ) : (
+                <>
+                  <NormalText>
+                    Bạn vẫn chưa chọn sản phẩm nào để mua.
+                  </NormalText>
+                  <ButtonPrimary onClick={handleClose}>OK</ButtonPrimary>
+                </>
+              )}
+            </ModalBody>
           </Modal>
         </PayBar>
       </HeaderLayout>
     </EmptyLayout>
   );
 };
-const CustomGrid = styled(Grid)`
+
+const ModalBody = styled(Card)`
+  width: 500px;
   position: fixed;
   top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-const ModalBody = styled(Card)`
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-shadow: none;
 
   padding: 1rem;

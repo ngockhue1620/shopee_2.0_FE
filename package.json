@@ -63,20 +63,7 @@
     "@babel/plugin-transform-template-literals",
     "react-hot-loader/babel"
   ],
-  "jest": {
-    "verbose": true,
-    "reporters": [
-      "default",
-      "jest-html-reporters"
-    ],
-    "testEnvironment": "node",
-    "transform": {
-      "^.+\\.(js?)$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!@codetrix-studio)"
-    ]
-  },
+ 
   "browserslist": {
     "production": [
       ">0.2%",

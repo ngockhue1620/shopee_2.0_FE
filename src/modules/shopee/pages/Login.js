@@ -85,13 +85,8 @@ export default function Login() {
               />
 
               <InputLogin
-                {...register("password", {
-                  required: "required",
-                  minLength: {
-                    value: 5,
-                    message: "min length is 5",
-                  },
-                })}
+                required
+                {...register("password")}
                 type="password"
                 placeholder="Mật khẩu"
               />

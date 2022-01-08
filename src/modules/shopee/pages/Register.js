@@ -64,9 +64,11 @@ export default function Register() {
               id="firstName"
               {...register("first_name")}
               type="text"
+              required
               placeholder="First Name"
             />
             <InputLogin
+              required
               id="lastName"
               {...register("last_name")}
               type="text"
@@ -74,12 +76,14 @@ export default function Register() {
             />
             <InputLogin
               id="userName"
+              required
               {...register("username")}
               type="text"
               placeholder="User Name"
             />
 
             <InputLogin
+              required
               id="password"
               aria-invalid={errors.passward ? "true" : "false"}
               {...register("password")}
@@ -88,6 +92,7 @@ export default function Register() {
             />
 
             <InputLogin
+            required
               id="passwordConfim"
               aria-invalid={errors.passward ? "true" : "false"}
               {...register("password_again")}
